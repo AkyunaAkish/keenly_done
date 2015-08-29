@@ -2,29 +2,41 @@
 <html lang="en" ng-app="keenlyDoneApp">
 <head>
   <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="google-site-verification" content="y7fcM3cBqSeboVwbAFvVgAFEtDYgHvFxfoicmNNFlgw" />
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel='shortcut icon' href='keenlydoneFavicon.ico' type='image/x-icon'/>
+
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <!-- AngularJS -->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
+
   <!-- Firebase -->
-  <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+  <script src="https://cdn.firebase.com/js/client/2.2.5/firebase.js"></script>
+
   <!-- AngularFire -->
   <script src="https://cdn.firebase.com/libs/angularfire/1.1.2/angularfire.min.js"></script>
 
-  <link rel="stylesheet" href="/stylesheets/style.css">
-  <link rel='shortcut icon' href='keenlydoneFavicon.ico' type='image/x-icon'/ >
-  <base href="/">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular-animate.js"></script>
+
+
+
+
+<base href="/">
   <title>keenlydone</title>
 </head>
 <body>
 
-  <img src="keenlydonelogoSmall.png" alt="">
-  <p>test sentence of sentenceness</p>
   <div ng-view></div>
+
+
+
 
   <script src="/js/module.js"></script>
   <script src="/js/controllers.js"></script>
