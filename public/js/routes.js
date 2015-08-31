@@ -11,7 +11,7 @@ app.config(function($routeProvider, $locationProvider){
   }).otherwise({redirectTo:'/'});
 
 
-  $locationProvider.html5Mode(true);
+  // $locationProvider.html5Mode(true);
 })
 
 app.run(function($rootScope, $location){
