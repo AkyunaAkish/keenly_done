@@ -1,0 +1,62 @@
+<div class="container.fluid clearfix">
+  <div class="row row-centered">
+
+    <div class="col-md-12 landingNav">
+      <div>
+        <div style="display: inline-block;">
+          <img src="keenlydonelogoSmall.png" class="landingPhrase"alt="Image failed to load">
+        </div>
+        <div style="display: inline-block;">
+          <img src="keenlydonePhraseMedium.png" class="landingPhrase" alt="Failed to load">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="container.fluid">
+  <div class="row row-centered">
+    <div class="col-xs-12 col-centered col-min"><div class="item"><div class="content" ng-init="showChat = true;"><button ng-click="showPostForm = !showPostForm">Add Post</button>&nbsp;<button ng-show="showChat" ng-click="showChat = !showChat">Chatroom</button><button ng-show="!showChat" ng-click="showChat = !showChat">Leave Chat</button><button ng-click="logout();" style="float:right;">Logout</button></div></div></div>
+    <!-- <div class="col-xs-6 col-centered col-min"><div class="item"><div class="content">&nbsp;&nbsp;</div></div></div> -->
+    <!-- <div class="col-xs-6 col-centered col-min"><div class="item"><div class="content">test</div></div></div>
+    <div class="col-xs-6 col-centered col-min"><div class="item"><div class="content">test</div></div></div>
+    <div class="col-xs-6 col-centered col-min"><div class="item"><div class="content">test</div></div></div> -->
+  </div>
+</div>
+
+<div class="container.fluid clearfix" ng-show="showPostForm">
+
+  <div class="row row-centered">
+    <div class="col-xs-6 col-centered loginDiv">
+      <div class="item">
+        <div class="content">
+          <h2 class="homeFont">Share your post</h2><br>
+          <form name='form' novalidate>
+            <p class="homeFont">Title</p>
+            <input type="text" ng-model="newPost.title" required>
+            <br>
+            <p class="homeFont">Author</p>
+            <input type="text" ng-model="newPost.author" required>
+            <br>
+            <p class="homeFont">Description</p>
+            <input type="text" ng-model="newPost.description" required>
+            <br>
+            <p class="homeFont">Image URL(optional)</p>
+            <input type="text" ng-model="newPost.imageUrl">
+            <br>
+            <p class="homeFont">Video URL(optional)</p>
+            <input type="text" ng-model="newPost.videoUrl">
+            <br>
+            <p class="homeFont">Audio URL(optional)</p>
+            <input type="text" ng-model="newPost.audioUrl">
+            <br>
+            <button ng-disabled="form.$invalid"ng-click="addPost();showPostForm = false;">Confirm Post</button><br>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
