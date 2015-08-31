@@ -1,45 +1,58 @@
 
 
 <div class="container.fluid clearfix">
-  <div class="row">
+  <div   class="row row-centered">
 
     <div class="col-md-12 landingNav">
-      <p><img src="keenlydonelogoSmall.png" alt="Image failed to load"></p>
-    </div>
-  </div>
-</div>
-
-<div class="container.fluid clearfix">
-  <div class="row row-centered">
-    <div class="col-xs-6 col-centered loginDiv">
-      <div class="item"><div class="content"><h2 class="homeFont">Login</h2><br>
-        <p class="homeFont">Email</p>
-          <input type="email" name="email" ng-model="user.email" id="email">
-        <br>
-        <p class="homeFont">Password</p>
-          <input type="password" name="password" ng-model="user.password" id="password">
-        <br>
-        <button ng-click="login()">Login</button>
+      <div>
+        <div style="display: inline-block;">
+          <img src="keenlydonelogoSmall.png" class="landingPhrase"alt="Image failed to load">
+        </div>
+        <div style="display: inline-block;">
+          <img src="keenlydonePhraseMedium.png" class="landingPhrase" alt="Failed to load">
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<div class="container.fluid clearfix" ng-hide="hideLogin">
+
+  <div class="row row-centered">
+    <div class="col-xs-6 col-centered loginDiv">
+      <div class="item">
+        <div class="content">
+          <h2 class="homeFont">Login</h2><br>
+          <p class="homeFont">Email</p>
+          <input type="email" name="email" ng-model="user.email" id="email">
+          <br>
+          <p class="homeFont">Password</p>
+          <input type="password" name="password" ng-model="user.password" id="password">
+          <br>
+          <button ng-click="login()">Login</button><br>
+          <button ng-click="showRegister = true; hideLogin = true;">Register</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
-<div class="container.fluid clearfix">
+<div class="container.fluid clearfix" ng-show="showRegister">
+  <!--   <img src="keenlydonePhraseMedium.png" alt="Failed to load" class="landingPhrase"> -->
   <div class="row row-centered">
     <div class="col-xs-6 col-centered loginDiv">
       <div class="item"><div class="content">
         <h2 class="homeFont">Register</h2><br>
 
         <p for="email" class="homeFont">Email</p>
-          <input type="email" name="email" ng-model="user.email" id="email">
+        <input type="email" name="email" ng-model="user.email" id="email">
         <br>
         <p for="password" class="homeFont">Password</p>
-          <input type="password" name="password" ng-model="user.password" id="password">
+        <input type="password" name="password" ng-model="user.password" id="password">
         <br>
-        <button ng-click="register()">Register</button>
+        <button ng-click="register()">Register</button><br>
+        <button ng-click="showRegister = false; hideLogin = false;">Back to Login</button>
       </div>
     </div>
   </div>
