@@ -1,11 +1,11 @@
 app.config(function($routeProvider, $locationProvider){
   $routeProvider
   .when('/', {
-    templateUrl: '/partials/landing.html',
+    templateUrl: 'public/partials/landing.html',
     controller: 'AuthController'
   })
   .when('/main', {
-    templateUrl:'/partials/main.html',
+    templateUrl:'public/partials/main.html',
     controller: 'PostsController',
     resolve: {user: resolveUser}
   }).otherwise({redirectTo:'/'});
