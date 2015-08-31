@@ -32,13 +32,14 @@ app.controller('PostsController', function($scope, $firebaseArray, $firebaseAuth
 
   $scope.addPost = function(){
     $scope.posts.$add($scope.newPost).then(function(data){
-      $scope.newPost.title = "";
-      $scope.newPost.author = "";
-      $scope.newPost.description = "";
-      $scope.newPost.imageUrl = "";
-      $scope.newPost.videoUrl = "";
-      $scope.newPost.audioUrl = "";
+
     })
+    $scope.newPost.title = "";
+    $scope.newPost.author = "";
+    $scope.newPost.description = "";
+    $scope.newPost.imageUrl = "";
+    $scope.newPost.videoUrl = "";
+    $scope.newPost.audioUrl = "";
   }
 
   $scope.showPost = function(post){
