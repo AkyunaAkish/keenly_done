@@ -9,6 +9,7 @@ img, embed, object, video{
 body{
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   background: rgb(195,235,253);
+  width: 100%;
 }
 .clearfix:before, .clearfix:after {
   content: "";
@@ -68,6 +69,13 @@ body{
   max-width:320px;
 }
 
+.col-xs-7.col-centered .item .col-xs-2.col-centered.myIframe {
+  width: 100% !important;
+}
+iframe {
+  width: 100%;
+}
+
 button{
   background: rgb(56,155,233);
   border:none;
@@ -84,3 +92,27 @@ button:hover{
 .homeFont{
   color: rgb(56,155,233);
 }
+
+.columnText{
+  max-width: 1170px;
+  word-break: break-all;
+}
+
+.postContent{
+  background: rgb(151,215,249);
+}
+
+.nav-pills{
+  background: rgb(185,236,253);
+
+}
+
+.nav-pills a{
+  color: rgb(51,151,236);
+}
+
+/* .iframeVid{
+position: relative;
+height: 50%;
+} */
+/* style="position: relative; height: 100%; width: 100%;" */

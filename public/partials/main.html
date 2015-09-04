@@ -17,46 +17,192 @@
 
 
 
-<div class="container.fluid">
-  <div class="row row-centered">
-    <div class="col-xs-12 col-centered col-min"><div class="item"><div class="content" ng-init="showChat = true;"><button ng-click="showPostForm = !showPostForm">Add Post</button>&nbsp;<button ng-show="showChat" ng-click="showChat = !showChat">Chatroom</button><button ng-show="!showChat" ng-click="showChat = !showChat">Leave Chat</button><button ng-click="logout();" style="float:right;">Logout</button></div></div></div>
-    <!-- <div class="col-xs-6 col-centered col-min"><div class="item"><div class="content">&nbsp;&nbsp;</div></div></div> -->
-    <!-- <div class="col-xs-6 col-centered col-min"><div class="item"><div class="content">test</div></div></div>
-    <div class="col-xs-6 col-centered col-min"><div class="item"><div class="content">test</div></div></div>
-    <div class="col-xs-6 col-centered col-min"><div class="item"><div class="content">test</div></div></div> -->
-  </div>
-</div>
+<div class="container.fluid buttonNav">
+  <div class="row row-centered buttonNav">
+    <div class="col-xs-12 col-centered col-min buttonNav">
+      <div class="item buttonNav">
+        <div class="content buttonNav" ng-init="showChat = true;">
+          <ul class="nav nav-pills">
+            <li>
+              <a
+              ng-init="showHideForm = false;addPostButton = true;" ng-show="addPostButton"
+              ng-click="showPostForm = !showPostForm;
+              showHideForm = !showHideForm;addPostButton = !addPostButton;
+              showChat = true;"
+              > <span class="glyphicon glyphicon-plus"></span>&nbsp;Add Post</a></li>
+              <li><a
+                ng-show="showHideForm"
+                ng-click="showPostForm = !showPostForm;
+                showHideForm = !showHideForm;addPostButton = !addPostButton"
+                ><span class="glyphicon glyphicon-minus"></span>&nbsp;Hide Form</a></li>
+                <li><a
+                  ng-show="showChat"
+                  ng-click="showChat = !showChat;
+                  showPostForm = false;
+                  addPostButton = true;showHideForm = false;"
+                  ><span class="glyphicon glyphicon-globe"></span>&nbsp;Chatroom</a></li>
+                  <li><a
+                    ng-show="!showChat" ng-click="showChat = !showChat"
+                    ><span class="glyphicon glyphicon-minus"></span>&nbsp;Leave Chat</a></li>
+                    <li style="float:right;"><a
+                      ng-click="logout();"
+                      ><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</a></li>
 
-<div class="container.fluid clearfix" ng-show="showPostForm">
+                    </ul>
+                    <!--   <button ng-init="showHideForm = false;addPostButton = true;" ng-show="addPostButton"
+                    ng-click="showPostForm = !showPostForm;
+                    showHideForm = !showHideForm;addPostButton = !addPostButton">
+                    Add Post</button>&nbsp;
+                    <button ng-show="showHideForm"
+                    ng-click="showPostForm = !showPostForm;
+                    showHideForm = !showHideForm;addPostButton = !addPostButton">
+                    Hide Form</button>
+                    <button ng-show="showChat" ng-click="showChat = !showChat">Chatroom</button>
+                    <button ng-show="!showChat" ng-click="showChat = !showChat">Leave Chat</button>
+                    <button ng-click="logout();" style="float:right;">Logout</button> -->
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-xs-6 col-centered col-min"><div class="item"><div class="content">&nbsp;&nbsp;</div></div></div> -->
+              <!-- <div class="col-xs-6 col-centered col-min"><div class="item"><div class="content">test</div></div></div>
+              <div class="col-xs-6 col-centered col-min"><div class="item"><div class="content">test</div></div></div>
+              <div class="col-xs-6 col-centered col-min"><div class="item"><div class="content">test</div></div></div> -->
+            </div>
+          </div>
 
-  <div class="row row-centered">
-    <div class="col-xs-6 col-centered loginDiv">
-      <div class="item">
-        <div class="content">
-          <h2 class="homeFont">Share your post</h2><br>
-          <form name='form' novalidate>
-          <p class="homeFont">Title</p>
-          <input type="text" ng-model="newPost.title" required>
-          <br>
-          <p class="homeFont">Author</p>
-          <input type="text" ng-model="newPost.author" required>
-          <br>
-          <p class="homeFont">Description</p>
-          <input type="text" ng-model="newPost.description" required>
-          <br>
-          <p class="homeFont">Image URL(optional)</p>
-          <input type="text" ng-model="newPost.imageUrl">
-          <br>
-          <p class="homeFont">Video URL(optional)</p>
-          <input type="text" ng-model="newPost.videoUrl">
-          <br>
-          <p class="homeFont">Audio URL(optional)</p>
-          <input type="text" ng-model="newPost.audioUrl">
-          <br>
-          <button ng-disabled="form.$invalid"ng-click="addPost();showPostForm = false;">Confirm Post</button><br>
-          </form>
+          <div class="container.fluid clearfix" ng-show="showPostForm">
+
+            <div class="row row-centered">
+              <div class="col-xs-6 col-centered loginDiv">
+                <div class="item">
+                  <div class="content">
+                    <h2 class="homeFont">Share your post</h2><br>
+                    <form name='form' novalidate>
+                      <p class="homeFont">Author</p>
+                      <input type="text" style="margin-bottom:2%;" ng-model="newPost.author" required>
+                      <br>
+                      <p class="homeFont">Text</p>
+                      <textarea name="text" rows="5" cols="19" style="margin-bottom:2%;resize:none;overflow:scroll;" ng-model="newPost.description" required>
+                      </textarea>
+                      <br>
+                      <h4 class="homeFont">Choose one media type(optional)</h4>
+
+                      <button
+                      ng-show="backShow";
+                      ng-click="
+                      vidShow = false;
+                      imgShow = false;
+                      spotShow = false;
+                      backShow = false;
+                      yvLink = true;
+                      imgLink = true;
+                      spotLink = true;
+                      newPost.videoUrl = null;
+                      newPost.audioUrl = null;
+                      newPost.imageUrl = null;">
+                      Change media
+                    </button>
+
+                    <button ng-show="yvLink" ng-init="yvLink = true;"
+                    ng-click="
+                    vidShow = true;
+                    backShow = true;
+                    yvLink = false;
+                    imgLink = false;
+                    spotLink = false;">
+                    Youtube/Vimeo Link</button><br ng-show="yvLink">
+
+                    <button ng-show="imgLink" ng-init="imgLink = true;"
+                    ng-click="
+                    imgShow = true;
+                    backShow = true;
+                    imgLink = false;
+                    yvLink = false;
+                    imgLink = false;
+                    spotLink = false;">
+                    Image Link</button><br ng-show="imgLink">
+
+                    <button ng-show="spotLink" ng-init="spotLink = true;"
+                    ng-click="
+                    spotShow = !spotShow;
+                    backShow = true;
+                    spotLink = false;
+                    yvLink = false;
+                    imgLink = false;
+                    spotLink = false;">
+                    Spotify Link</button><br ng-show="spotLink">
+
+                    <br><p class="homeFont" ng-show="vidShow">Youtube or Vimeo URL(optional)</p>
+                    <input type="text" ng-show="vidShow" style="margin-bottom:2%;" ng-model="newPost.videoUrl">
+                    <br ng-show="vidShow">
+                    <p class="homeFont" ng-show="imgShow">Image URL(optional)</p>
+                    <input type="text" ng-show="imgShow" style="margin-bottom:2%;" ng-model="newPost.imageUrl">
+                    <br ng-show="imgShow">
+                    <p class="homeFont" ng-show="spotShow">Spotify URL(optional)</p>
+                    <input type="text" ng-show="spotShow"style="margin-bottom:2%;" ng-model="newPost.audioUrl">
+                    <br ng-show="spotShow">
+
+
+                    <button ng-disabled="form.$invalid"
+                    ng-click="addPost();showPostForm = false;
+                    addPostButton = true;showHideForm = false;
+                    vidShow = false;
+                    imgShow = false;
+                    spotShow = false;
+                    backShow = false;
+                    yvLink = true;
+                    imgLink = true;
+                    spotLink = true;
+                    newPost.videoUrl = null;
+                    newPost.audioUrl = null;
+                    newPost.imageUrl = null;
+                    ">Confirm Post</button><br>
+
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+
+
+
+
+        <div class="container" ng-hide="!showChat" ng-repeat="post in posts | orderBy: '-date'">
+
+          <div class="row row-centered">
+            <div class="col-xs-7 col-centered"><div class="item"><div class="content postContent">
+              <h3 class="columnText">{{post.author}}</h3>
+              <p class="columnText">{{post.description}}</p>
+              <!--       <div class="col-xs-2 col-centered myIframe" ng-show="post.videoUrl" ng-bind-html="post.videoUrl"></div> -->
+              <iframe width="100%;" height="250" ng-show="post.videoUrl" ng-src="{{trustSrc(post.videoUrl)}}" class="iframeVid" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+              <img class="col-xs-2 col-centered" ng-show="post.imageUrl" ng-src="{{post.imageUrl}}" style="width:100%;height:250px;" alt="">
+              <iframe width="100%;" ng-show="post.audioUrl" ng-src="{{trustSrc(post.audioUrl)}}" class="iframeVid" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+
+              <i class="fa fa-calendar">&nbsp;</i>
+              <time title="{{ post.date | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}">
+                {{ post.date | amCalendar }}
+              </time>
+
+
+            </div></div></div>
+
+          </div>
+        </div>
+
+
+        <div class="container" ng-hide="showChat">
+          <div class="row row-centered">
+            <div class="col-xs-6 col-centered"><div class="item"><div class="content">
+              <textarea name="name" rows="8" cols="40">
+                hi
+              </textarea>
+
+            </div></div></div>
+            <!-- <div class="col-xs-6 col-centered"><div class="item"><div class="content"></div></div></div>
+            <div class="col-xs-3 col-centered"><div class="item"><div class="content"></div></div></div>
+            <div class="col-xs-3 col-centered"><div class="item"><div class="content"></div></div></div>
+            <div class="col-xs-3 col-centered"><div class="item"><div class="content"></div></div></div> -->
+          </div>
+        </div>

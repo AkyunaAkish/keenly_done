@@ -20,7 +20,7 @@ app.controller('AuthController', function($scope, $location, $firebaseAuth){
 
 })
 
-app.controller('PostsController', function($scope, $firebaseArray, $firebaseAuth, $location){
+app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$location', '$sce', function($scope, $firebaseArray, $firebaseAuth, $location, $sce){
 
   var authRef = new Firebase("https://keenlydone.firebaseio.com");
   var authObj = $firebaseAuth(authRef);
@@ -28,12 +28,56 @@ app.controller('PostsController', function($scope, $firebaseArray, $firebaseAuth
   var postsRef = new Firebase("https://keenlydone.firebaseio.com/posts");
   //use reference to create synchronized array
   $scope.posts = $firebaseArray(postsRef);
-  $scope.newPost = {title: "", author: "", description: "", imageUrl: "", videoUrl: "", audioUrl: ""};
+
+  $scope.trustSrc = function(src) {
+    return $sce.trustAsResourceUrl(src);
+  }
+
+
+
+  // $scope.posts.$loaded()
+  // .then(function(){
+  //   angular.forEach($scope.posts, function(post) {
+  //     console.log(post);
+  //     post.videoUrl = $sce.trustAsHtml(post.videoUrl);
+  //   })
+  // });
+
+  $scope.newPost = {author: "", description: "", imageUrl: "", videoUrl: "", audioUrl: ""};
 
   $scope.addPost = function(){
+
+    if($scope.newPost.audioUrl){
+      var n = $scope.newPost.audioUrl.split('/')
+      $scope.newPost.audioUrl = 'https://embed.spotify.com/?uri=spotify:track:' + n[n.length -1];
+    }
+
+    var pattern1 = /(?:http?s?:\/\/)?(?:www\.)?(?:vimeo\.com)\/?(.+)/g;
+    var pattern2 = /(?:http?s?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g;
+
+    if(pattern1.test($scope.newPost.videoUrl)){
+      var replacement = 'https://player.vimeo.com/video/$1';
+      $scope.newPost.videoUrl = $scope.newPost.videoUrl.replace(pattern1, replacement);
+    }
+
+
+    if(pattern2.test($scope.newPost.videoUrl)){
+      var replacement = 'http://www.youtube.com/embed/$1';
+      $scope.newPost.videoUrl = $scope.newPost.videoUrl.replace(pattern2, replacement);
+    }
+
+    var date = new Date();
+    $scope.newPost.date = date.toString();
+
+
+
+
+
+
     $scope.posts.$add($scope.newPost).then(function(data){
 
     })
+
     $scope.newPost.title = "";
     $scope.newPost.author = "";
     $scope.newPost.description = "";
@@ -85,4 +129,4 @@ app.controller('PostsController', function($scope, $firebaseArray, $firebaseAuth
     authObj.$unauth();
     $location.path('/');
   }
-});
+}]);

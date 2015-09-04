@@ -7,7 +7,8 @@ img, embed, object, video {
 
 body {
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  background: #c3ebfd; }
+  background: #c3ebfd;
+  width: 100%; }
 
 .clearfix:before, .clearfix:after {
   content: "";
@@ -57,6 +58,12 @@ body {
   /* custom max width */
   max-width: 320px; }
 
+.col-xs-7.col-centered .item .col-xs-2.col-centered.myIframe {
+  width: 100% !important; }
+
+iframe {
+  width: 100%; }
+
 button {
   background: #389be9;
   border: none;
@@ -71,3 +78,22 @@ button:hover {
 
 .homeFont {
   color: #389be9; }
+
+.columnText {
+  max-width: 1170px;
+  word-break: break-all; }
+
+.postContent {
+  background: #97d7f9; }
+
+.nav-pills {
+  background: #b9ecfd; }
+
+.nav-pills a {
+  color: #3397ec; }
+
+/* .iframeVid{
+position: relative;
+height: 50%;
+} */
+/* style="position: relative; height: 100%; width: 100%;" */
