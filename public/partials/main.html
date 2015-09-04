@@ -76,19 +76,19 @@
               <div class="col-xs-6 col-centered loginDiv">
                 <div class="item">
                   <div class="content">
-                    <h2 class="homeFont">Share your post</h2><br>
+                    <h2 class="homeFont"><i class="fa fa-share-alt"></i>&nbsp;Add Post</h2><br>
                     <form name='form' novalidate>
-                      <p class="homeFont">Author</p>
+                      <p class="homeFont"><i class="fa fa-user"></i>&nbsp;Author</p>
                       <input type="text" style="margin-bottom:2%;" ng-model="newPost.author" required>
                       <br>
-                      <p class="homeFont">Text</p>
+                      <p class="homeFont"><i class="fa fa-pencil"></i>&nbsp;Text</p>
                       <textarea name="text" rows="5" cols="19" style="margin-bottom:2%;resize:none;overflow:scroll;" ng-model="newPost.description" required>
                       </textarea>
                       <br>
-                      <h4 class="homeFont">Choose one media type(optional)</h4>
+                      <h4 class="homeFont"><i class="fa fa-file-code-o"></i>&nbsp;Choose one media type(optional)</h4>
 
                       <button
-                      ng-show="backShow";
+                      ng-show="backShow"
                       ng-click="
                       vidShow = false;
                       imgShow = false;
@@ -100,8 +100,8 @@
                       newPost.videoUrl = null;
                       newPost.audioUrl = null;
                       newPost.imageUrl = null;">
-                      Change media
-                    </button>
+                      <i class="fa fa-step-backward"></i>&nbsp;Change media
+                    </button><br ng-show="backShow">
 
                     <button ng-show="yvLink" ng-init="yvLink = true;"
                     ng-click="
@@ -110,7 +110,8 @@
                     yvLink = false;
                     imgLink = false;
                     spotLink = false;">
-                    Youtube/Vimeo Link</button><br ng-show="yvLink">
+                    <i class="fa fa-youtube"></i>&nbsp;
+                    Youtube/<i class="fa fa-vimeo"></i>&nbsp;Vimeo Link</button><br ng-show="yvLink">
 
                     <button ng-show="imgLink" ng-init="imgLink = true;"
                     ng-click="
@@ -120,7 +121,7 @@
                     yvLink = false;
                     imgLink = false;
                     spotLink = false;">
-                    Image Link</button><br ng-show="imgLink">
+                    <i class="fa fa-picture-o"></i>&nbsp;Image Link</button><br ng-show="imgLink">
 
                     <button ng-show="spotLink" ng-init="spotLink = true;"
                     ng-click="
@@ -130,15 +131,15 @@
                     yvLink = false;
                     imgLink = false;
                     spotLink = false;">
-                    Spotify Link</button><br ng-show="spotLink">
+                  <i class="fa fa-spotify"></i>&nbsp;Spotify Link</button><br ng-show="spotLink">
 
-                    <br><p class="homeFont" ng-show="vidShow">Youtube or Vimeo URL(optional)</p>
+                    <br><p class="homeFont" ng-show="vidShow"><i class="fa fa-youtube"></i>&nbsp;Youtube or <i class="fa fa-vimeo"></i>&nbsp;Vimeo URL(optional)</p>
                     <input type="text" ng-show="vidShow" style="margin-bottom:2%;" ng-model="newPost.videoUrl">
                     <br ng-show="vidShow">
-                    <p class="homeFont" ng-show="imgShow">Image URL(optional)</p>
+                    <p class="homeFont" ng-show="imgShow"><i class="fa fa-picture-o"></i>&nbsp;Image URL(optional)</p>
                     <input type="text" ng-show="imgShow" style="margin-bottom:2%;" ng-model="newPost.imageUrl">
                     <br ng-show="imgShow">
-                    <p class="homeFont" ng-show="spotShow">Spotify URL(optional)</p>
+                    <p class="homeFont" ng-show="spotShow"><i class="fa fa-spotify"></i>&nbsp;Spotify URL(optional)</p>
                     <input type="text" ng-show="spotShow"style="margin-bottom:2%;" ng-model="newPost.audioUrl">
                     <br ng-show="spotShow">
 
@@ -156,7 +157,7 @@
                     newPost.videoUrl = null;
                     newPost.audioUrl = null;
                     newPost.imageUrl = null;
-                    ">Confirm Post</button><br>
+                    "><i class="fa fa-check-circle-o"></i>&nbsp;Confirm Post</button><br>
 
                   </form>
                 </div>
