@@ -17,6 +17,7 @@
 
 
 
+
 <div class="container.fluid buttonNav">
   <div class="row row-centered buttonNav">
     <div class="col-xs-12 col-centered col-min buttonNav">
@@ -63,10 +64,7 @@
                   </div>
                 </div>
               </div>
-              <!-- <div class="col-xs-6 col-centered col-min"><div class="item"><div class="content">&nbsp;&nbsp;</div></div></div> -->
-              <!-- <div class="col-xs-6 col-centered col-min"><div class="item"><div class="content">test</div></div></div>
-              <div class="col-xs-6 col-centered col-min"><div class="item"><div class="content">test</div></div></div>
-              <div class="col-xs-6 col-centered col-min"><div class="item"><div class="content">test</div></div></div> -->
+
             </div>
           </div>
 
@@ -131,7 +129,7 @@
                     yvLink = false;
                     imgLink = false;
                     spotLink = false;">
-                  <i class="fa fa-spotify"></i>&nbsp;Spotify Link</button><br ng-show="spotLink">
+                    <i class="fa fa-spotify"></i>&nbsp;Spotify Link</button><br ng-show="spotLink">
 
                     <br><p class="homeFont" ng-show="vidShow"><i class="fa fa-youtube"></i>&nbsp;Youtube or <i class="fa fa-vimeo"></i>&nbsp;Vimeo URL(optional)</p>
                     <input type="text" ng-show="vidShow" style="margin-bottom:2%;" ng-model="newPost.videoUrl">
@@ -176,34 +174,64 @@
               <h3 class="columnText">{{post.author}}</h3>
               <p class="columnText">{{post.description}}</p>
               <!--       <div class="col-xs-2 col-centered myIframe" ng-show="post.videoUrl" ng-bind-html="post.videoUrl"></div> -->
-              <iframe width="100%;" height="250" ng-show="post.videoUrl" ng-src="{{trustSrc(post.videoUrl)}}" class="iframeVid" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-              <img class="col-xs-2 col-centered" ng-show="post.imageUrl" ng-src="{{post.imageUrl}}" style="width:100%;height:250px;" alt="">
+              <iframe width="100%;" height="250" ng-show="post.videoUrl" ng-src="{{trustSrc(post.videoUrl)}}" class="iframeVid" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><br>
+              <img class="col-xs-2 col-centered" ng-show="post.imageUrl" ng-src="{{post.imageUrl}}" style="width:100%;height:250px;" alt=""><br>
               <iframe width="100%;" ng-show="post.audioUrl" ng-src="{{trustSrc(post.audioUrl)}}" class="iframeVid" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 
-              <i class="fa fa-calendar">&nbsp;</i>
-              <time title="{{ post.date | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}">
+              &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-calendar columnText">&nbsp;</i>
+              <time title="{{ post.date | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}" class="columnText">
                 {{ post.date | amCalendar }}
-              </time>
+              </time>&nbsp;&nbsp;
+
+              <button ng-click="like(post)"><i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;<p style="display:inline;">{{post.likes.length}}</p></button>&nbsp;&nbsp;
+              <button class="viewCommentsButton" ng-click="showComments = !showComments;showAddComment = false;" style="white-space: nowrap;">
+                <i class="fa fa-comment" style="white-space: nowrap;"></i>&nbsp;{{post.comments.length}}
+                <p ng-show="post.comments.length == 1" style="display: inline;">Comment</p>
+                <p ng-show="post.comments.length == 0 || post.comments.length > 1" style="display: inline;">Comments</p>
+              </button>&nbsp;&nbsp;
+
+              <button class="addCommentButton" ng-click="showAddComment = !showAddComment;showComments = false;">
+                <i class="fa fa-pencil"></i>&nbsp;Add Comment</button></p>
+
+                <div style="text-align:center;" ng-show="showAddComment">
+                  <p class="columnText">Author</p>
+                  <input type="text" ng-model="commentAuthor"><br><br>
+                  <p class="columnText">Comment</p>
+                  <textarea name="name" rows="8" cols="19" style="resize:none;"
+                  ng-model="commentInput"></textarea><br>
+                  <button ng-click="addComment(post,commentAuthor,commentInput);
+                  showAddComment = false;">Submit Comment</button><br><br>
+                </div>
+
+                <div class="commentSection" ng-show="showComments"
+                ng-repeat="comment in post.comments">
+                <p class="commentAndAuthorP columnText" style="display:inline;"><b>{{comment.commentAuthor}}&nbsp;</b>
+                  <p style="display:inline;">{{comment.commentInput}}</p></p>
+
+                </div>
 
 
-            </div></div></div>
 
+              </div></div></div>
+
+
+
+            </div>
           </div>
-        </div>
 
 
-        <div class="container" ng-hide="showChat">
-          <div class="row row-centered">
-            <div class="col-xs-6 col-centered"><div class="item"><div class="content">
-              <textarea name="name" rows="8" cols="40">
-                hi
-              </textarea>
+          <div class="container" ng-hide="showChat">
+            <div class="row row-centered">
+              <div class="col-xs-6 col-centered"><div class="item"><div class="content">
+                <textarea name="name" rows="8" cols="40">
+                  hi
+                </textarea>
 
-            </div></div></div>
-            <!-- <div class="col-xs-6 col-centered"><div class="item"><div class="content"></div></div></div>
-            <div class="col-xs-3 col-centered"><div class="item"><div class="content"></div></div></div>
-            <div class="col-xs-3 col-centered"><div class="item"><div class="content"></div></div></div>
-            <div class="col-xs-3 col-centered"><div class="item"><div class="content"></div></div></div> -->
+              </div></div></div>
+              <!-- <div class="col-xs-6 col-centered"><div class="item"><div class="content"></div></div></div>
+              <div class="col-xs-3 col-centered"><div class="item"><div class="content"></div></div></div>
+              <div class="col-xs-3 col-centered"><div class="item"><div class="content"></div></div></div>
+              <div class="col-xs-3 col-centered"><div class="item"><div class="content"></div></div></div> -->
+            </div>
           </div>
-        </div>

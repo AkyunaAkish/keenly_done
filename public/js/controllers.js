@@ -8,9 +8,47 @@ app.controller('AuthController', function($scope, $location, $firebaseAuth){
     })
   }
 
+  // $scope.register = function(){
+  //   authRef.createUser({
+  //   email    : $scope.user.email,
+  //   password : $scope.user.password,
+  //   username: $scope.user.username
+  // }, function(error, userData) {
+  //   if (error) {
+  //     console.log("Error creating user:", error);
+  //   } else {
+  //     console.log(userData);
+  //     // save the user's profile into the database so we can list users,
+  //     // use them in Security and Firebase Rules, and show profiles
+  //     authRef.child("users").child(userData.uid).set({
+  //       // provider: userData.provider,
+  //       name: $scope.user.username
+  //     });
+  //     $scope.login();
+  //   }
+  // });
+  // }
+
+  // $scope.register = function(){
+  //   var q = authRef.child('users').orderByChild('username').equalTo($scope.user.username);
+  //   q.once('value', function(snapshot) {
+  //     if (snapshot.val() === null) {
+  //       // username does not yet exist, go ahead and add new user
+  //       authObj.$createUser($scope.user).then(function(){
+  //           $scope.login();
+  //         })
+  //     } else {
+  //       // username already exists, ask user for a different name
+  //       alert('Username taken');
+  //     }
+  //   });
+  // }
+
+
   $scope.login = function(){
     authObj.$authWithPassword($scope.user).then(function(){
       $location.path('/main');
+
     },function(){
       alert('Invalid email or password');
     })
@@ -18,9 +56,23 @@ app.controller('AuthController', function($scope, $location, $firebaseAuth){
 
 
 
+
 })
 
 app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$location', '$sce', function($scope, $firebaseArray, $firebaseAuth, $location, $sce){
+  $scope.loggedUser = {};
+
+  function authDataCallback(authData) {
+    if (authData) {
+      // console.log("User " + authData.uid + " is logged in with " + authData.provider);
+      // console.log("AUTHDATA = ", authData);
+      // console.log("AUTHDATA UID = ", authData.uid);
+      $scope.loggedUser = authData;
+    } else {
+      console.log("User is logged out");
+    }
+  }
+
 
   var authRef = new Firebase("https://keenlydone.firebaseio.com");
   var authObj = $firebaseAuth(authRef);
@@ -33,7 +85,10 @@ app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$
     return $sce.trustAsResourceUrl(src);
   }
 
+  // console.log("AUTHREF ONAUTH = ", authRef.onAuth);
+  // console.log("AUTHOBJ = ", authObj);
 
+  authRef.onAuth(authDataCallback);
 
   // $scope.posts.$loaded()
   // .then(function(){
@@ -51,6 +106,11 @@ app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$
       var n = $scope.newPost.audioUrl.split('/')
       $scope.newPost.audioUrl = 'https://embed.spotify.com/?uri=spotify:track:' + n[n.length -1];
     }
+    // if($scope.newPost.description){
+    //   var urlRegex = /(https?:\/\/[^\s]+)/g;
+    //   var n = $scope.newPost.description.replace(urlRegex, $sce.trustAsHtml('<a href="$1" target="_blank">$1</a>'));
+    //   $scope.newPost.description = n;
+    // }
 
     var pattern1 = /(?:http?s?:\/\/)?(?:www\.)?(?:vimeo\.com)\/?(.+)/g;
     var pattern2 = /(?:http?s?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g;
@@ -66,8 +126,9 @@ app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$
       $scope.newPost.videoUrl = $scope.newPost.videoUrl.replace(pattern2, replacement);
     }
 
-    var date = new Date();
-    $scope.newPost.date = date.toString();
+    var date = Date.now();
+
+    $scope.newPost.date = date;
 
 
 
@@ -86,37 +147,37 @@ app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$
     $scope.newPost.audioUrl = "";
   }
 
-  $scope.showPost = function(post){
-    $scope.title = post.title;
-    $scope.author = post.author;
-    $scope.description = post.description;
-    $scope.imageUrl = post.imageUrl;
-    $scope.videoUrl = post.videoUrl;
-    $scope.audioUrl = post.audioUrl;
-    $scope.id = post.$id;
-  }
-
-  $scope.saveChanges = function(post,title,author,description,imageUrl,videoUrl,audioUrl){
-    //var id = $scope.id;
-    //var record = $scope.todos.$getRecord(id);
-    console.log(post);
-    console.log(title);
-    console.log(author);
-    console.log(description);
-    console.log(imageUrl);
-    console.log(videoUrl);
-    console.log(audioUrl);
-
-    post.title = title;
-    post.author = author;
-    post.description = description;
-    post.imageUrl = imageUrl;
-    post.videoUrl = videoUrl;
-    post.audioUrl = audioUrl;
-    console.log(post);
-
-    $scope.posts.$save(post);
-  }
+  // $scope.showPost = function(post){
+  //   $scope.title = post.title;
+  //   $scope.author = post.author;
+  //   $scope.description = post.description;
+  //   $scope.imageUrl = post.imageUrl;
+  //   $scope.videoUrl = post.videoUrl;
+  //   $scope.audioUrl = post.audioUrl;
+  //   $scope.id = post.$id;
+  // }
+  //
+  // $scope.saveChanges = function(post,title,author,description,imageUrl,videoUrl,audioUrl){
+  //   //var id = $scope.id;
+  //   //var record = $scope.todos.$getRecord(id);
+  //   console.log(post);
+  //   console.log(title);
+  //   console.log(author);
+  //   console.log(description);
+  //   console.log(imageUrl);
+  //   console.log(videoUrl);
+  //   console.log(audioUrl);
+  //
+  //   post.title = title;
+  //   post.author = author;
+  //   post.description = description;
+  //   post.imageUrl = imageUrl;
+  //   post.videoUrl = videoUrl;
+  //   post.audioUrl = audioUrl;
+  //   console.log(post);
+  //
+  //   $scope.posts.$save(post);
+  // }
 
   $scope.removePost = function(post){
     $scope.posts.$remove(post);
@@ -128,5 +189,49 @@ app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$
   $scope.logout = function(){
     authObj.$unauth();
     $location.path('/');
+  }
+
+
+
+  $scope.addComment = function(post, commentAuthor, commentInput){
+
+    if(post.comments === undefined){
+      post.comments = [];
+    }
+    var commentObj = {};
+    commentObj.commentAuthor = commentAuthor;
+    commentObj.commentInput = commentInput;
+    post.comments.push(commentObj);
+
+    $scope.posts.$save(post);
+  }
+
+  $scope.like = function(post){
+    // post.likes++;
+    if(post.likes === undefined){
+      post.likes = [];
+    }
+
+    var thing = $scope.loggedUser.uid;
+    console.log("THING = ", thing);
+
+    if(post.likes.length == 0){
+      post.likes.push(thing);
+    }else{
+
+
+      for(i=0;i<post.likes.length;i++){
+        if(post.likes[i] === thing){
+          console.log("Can't like more than once");
+          return false;
+        }else{
+          post.likes.push(thing);
+        }
+      }
+    }
+    // post.likes.push(thing);
+
+    // post.likes.push(authRef.onAuth(authDataCallback));
+    $scope.posts.$save(post)
   }
 }]);

@@ -1,4 +1,4 @@
-app.config(function($routeProvider, $locationProvider){
+app.config(function($routeProvider){
   $routeProvider
   .when('/', {
     templateUrl: '/partials/landing.html',
@@ -9,6 +9,7 @@ app.config(function($routeProvider, $locationProvider){
     controller: 'PostsController',
     resolve: {user: resolveUser}
   }).otherwise({redirectTo:'/'});
+
 
 })
 
