@@ -202,6 +202,8 @@ app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$
     post.comments.push(commentObj);
 
     $scope.posts.$save(post);
+    $scope.commentAuthor = "";
+    $scope.commentInput = "";
   }
 
   $scope.like = function(post){
@@ -227,3 +229,23 @@ app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$
 
   }
 }]);
+
+app.controller('ChatController',['$scope','$firebaseArray', '$firebaseAuth', '$location', '$sce',
+ function($scope, $firebaseArray, $firebaseAuth, $location, $sce){
+
+   var authRef = new Firebase("https://keenlydone.firebaseio.com");
+   var authObj = $firebaseAuth(authRef);
+
+   var messagesRef = new Firebase("https://keenlydone.firebaseio.com/messages");
+   //use reference to create synchronized array
+   $scope.messages = $firebaseArray(messagesRef);
+
+   $scope.addMessage = function(){
+     $scope.messages.$add($scope.newMessage).then(function(data){
+
+     })
+     $scope.newMessage.chatMessage = "";
+   }
+
+
+  }]);

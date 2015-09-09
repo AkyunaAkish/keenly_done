@@ -179,16 +179,16 @@
               <iframe width="100%;" ng-show="post.audioUrl" ng-src="{{trustSrc(post.audioUrl)}}" class="iframeVid" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 
-              &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-calendar columnText">&nbsp;</i>
-              <time title="{{ post.date | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}" class="columnText">
+              &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-calendar columnText postButtons">&nbsp;</i>
+              <time title="{{ post.date | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}" class="columnText postButtons">
                 {{ post.date | amCalendar }}
               </time>&nbsp;&nbsp;
 
-              <button ng-click="like(post)"><i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;
+              <button ng-click="like(post)" class="postButtons"><i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;
                 <p ng-show="post.likes.length > 0"style="display:inline;">{{post.likes.length}}</p>
                 <p ng-show="!post.likes.length" style="display:inline;">0</p>
               </button>&nbsp;&nbsp;
-              <button class="viewCommentsButton" ng-click="showComments = !showComments;showAddComment = false;" style="white-space: nowrap;">
+              <button class="viewCommentsButton postButtons" ng-click="showComments = !showComments;showAddComment = false;" style="white-space: nowrap;">
                 <i class="fa fa-comment" style="white-space: nowrap;"></i>&nbsp;
                 <p ng-show="!post.comments.length;"style="display:inline;">0</p>
                 <p ng-show="post.comments.length > 0;"style="display:inline;">{{post.comments.length}}</p>
@@ -196,17 +196,19 @@
                 <p ng-show="post.comments.length == 0 || post.comments.length > 1" style="display: inline;">Comments</p>
               </button>&nbsp;&nbsp;
 
-              <button class="addCommentButton" ng-click="showAddComment = !showAddComment;showComments = false;">
+              <button class="addCommentButton postButtons" ng-click="showAddComment = !showAddComment;showComments = false;">
                 <i class="fa fa-pencil"></i>&nbsp;Add Comment</button></p>
 
                 <div style="text-align:center;" ng-show="showAddComment">
-                  <p class="columnText">Author</p>
-                  <input type="text" ng-model="commentAuthor"><br><br>
-                  <p class="columnText">Comment</p>
-                  <textarea name="name" rows="8" cols="19" style="resize:none;"
-                  ng-model="commentInput"></textarea><br>
-                  <button ng-click="addComment(post,commentAuthor,commentInput);
-                  showAddComment = false;">Submit Comment</button><br><br>
+                  <form name="form" novalidate>
+                    <p class="columnText">Author</p>
+                    <input type="text" ng-model="commentAuthor" required><br><br>
+                    <p class="columnText">Comment</p>
+                    <textarea name="name" rows="8" cols="19" style="resize:none;"
+                    ng-model="commentInput" required></textarea><br>
+                    <button ng-disabled="form.$invalid" ng-click="addComment(post,commentAuthor,commentInput);
+                    showAddComment = false;commentAuthor = null;commentInput = null;">Submit Comment</button><br><br>
+                  </form>
                 </div>
 
                 <div class="commentSection" ng-show="showComments"
@@ -227,17 +229,60 @@
           </div>
 
 
-          <div class="container" ng-hide="showChat">
-            <div class="row row-centered">
-              <div class="col-xs-6 col-centered"><div class="item"><div class="content">
-                <textarea name="name" rows="8" cols="40">
-                  hi
-                </textarea>
+          <!--       <div class="container" ng-hide="showChat">
+          <div class="row row-centered">
+          <div class="col-xs-6 col-centered"><div class="item"><div class="content">
+          <textarea name="name" rows="8" cols="40">
+          hi
+        </textarea>
 
-              </div></div></div>
-              <!-- <div class="col-xs-6 col-centered"><div class="item"><div class="content"></div></div></div>
-              <div class="col-xs-3 col-centered"><div class="item"><div class="content"></div></div></div>
-              <div class="col-xs-3 col-centered"><div class="item"><div class="content"></div></div></div>
-              <div class="col-xs-3 col-centered"><div class="item"><div class="content"></div></div></div> -->
+      </div></div></div>
+      <div class="col-xs-6 col-centered"><div class="item"><div class="content"></div></div></div>
+      <div class="col-xs-3 col-centered"><div class="item"><div class="content"></div></div></div>
+      <div class="col-xs-3 col-centered"><div class="item"><div class="content"></div></div></div>
+      <div class="col-xs-3 col-centered"><div class="item"><div class="content"></div></div></div>
+    </div>
+  </div>
+-->
+
+<div ng-controller="ChatController">
+
+  <div class="container clearfix" ng-hide="showChat">
+    <div class="row row-centered">
+      <div class="col-xs-7 col-centered">
+        <div class="item">
+          <div class="content chatDiv">
+            <div ng-repeat="message in messages">
+            <p class="columnText" style="display:inline;margin-bottom:25%;">{{message.chatAuthor}}</p>
+            <p style="display:inline;">{{message.chatMessage}}</p>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container clearfix" style="margin-top:-30px;"ng-hide="showChat">
+    <div class="row row-centered">
+      <div class="col-xs-7 col-centered">
+        <div class="item">
+          <div class="content chatInputDiv">
+
+            <div class="content chatInputs">
+              <form name="form" novalidate>
+                <label for="chatAuthor" class="columnText">Author
+                  <input style="color:black;" type="text" id="chatAuthor" ng-model="newMessage.chatAuthor" required>
+                </label>
+                <label for="chatText" class="columnText">Text
+                  <input style="color:black;" type="text" id="chatText" ng-model="newMessage.chatMessage" required>
+                </label>
+                <button ng-disabled="form.$invalid" ng-click="addMessage();">Submit</button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
