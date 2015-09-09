@@ -170,9 +170,9 @@
         <div class="container" ng-hide="!showChat" ng-repeat="post in posts | orderBy: '-date'">
 
           <div class="row row-centered">
-            <div class="col-xs-7 col-centered"><div class="item"><div class="content postContent">
-              <h3 class="columnText">{{post.author}}</h3>
-              <p class="columnText">{{post.description}}</p>
+            <div class="col-xs-7 col-centered"><div class="item"><div class="content postContent"><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;<h3 class="columnText" style="display:inline;">{{post.author}}</h3><br><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;<p class="columnText" style="display:inline;">{{post.description}}</p>
               <!--       <div class="col-xs-2 col-centered myIframe" ng-show="post.videoUrl" ng-bind-html="post.videoUrl"></div> -->
               <iframe width="100%;" height="250" ng-show="post.videoUrl" ng-src="{{trustSrc(post.videoUrl)}}" class="iframeVid" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><br>
               <img class="col-xs-2 col-centered" ng-show="post.imageUrl" ng-src="{{post.imageUrl}}" style="width:100%;height:250px;" alt=""><br>
@@ -189,7 +189,9 @@
                 <p ng-show="!post.likes.length" style="display:inline;">0</p>
               </button>&nbsp;&nbsp;
               <button class="viewCommentsButton" ng-click="showComments = !showComments;showAddComment = false;" style="white-space: nowrap;">
-                <i class="fa fa-comment" style="white-space: nowrap;"></i>&nbsp;{{post.comments.length}}
+                <i class="fa fa-comment" style="white-space: nowrap;"></i>&nbsp;
+                <p ng-show="!post.comments.length;"style="display:inline;">0</p>
+                <p ng-show="post.comments.length > 0;"style="display:inline;">{{post.comments.length}}</p>
                 <p ng-show="post.comments.length == 1" style="display: inline;">Comment</p>
                 <p ng-show="post.comments.length == 0 || post.comments.length > 1" style="display: inline;">Comments</p>
               </button>&nbsp;&nbsp;
@@ -209,7 +211,8 @@
 
                 <div class="commentSection" ng-show="showComments"
                 ng-repeat="comment in post.comments">
-                <p class="commentAndAuthorP columnText" style="display:inline;"><b>{{comment.commentAuthor}}&nbsp;</b>
+                <p class="commentAndAuthorP columnText" style="display:inline;">
+                  &nbsp;&nbsp;&nbsp;&nbsp;<b>{{comment.commentAuthor}}&nbsp;</b>
                   <p style="display:inline;">{{comment.commentInput}}</p></p>
 
                 </div>
