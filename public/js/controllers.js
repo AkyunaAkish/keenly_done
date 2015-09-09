@@ -212,7 +212,7 @@ app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$
     }else{
       if(post.likes.indexOf(thing) > -1){
         var like = post.likes.indexOf(thing);
-        post.likes.splice(like);
+        post.likes.splice(like,1);
         $scope.posts.$save(post);
         console.log('Cant like more than once');
       }else{
