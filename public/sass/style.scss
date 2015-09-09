@@ -147,12 +147,16 @@ textarea.ng-valid.ng-dirty{
   border-color: #2ecc71;
 }
 
-.ng-hide-add{
+/* .ng-hide-add{
+  transition:0.75s;
+  opacity: 0;
   animation:0.9s lightSpeedOut ease;
 }
 .ng-hide-remove{
-  animation:0.5s flipInX ease;
-}
+  transition:0.75s;
+  opacity: 1;
+animation:0.5s flipInX ease;
+} */
 .ng-enter{
   transition:0.75s;
   opacity: 0;
@@ -176,8 +180,8 @@ textarea.ng-valid.ng-dirty{
   opacity: 0;
 }
 
-/* ANIMATIONS (FROM ANIMATE.CSS) ======================== */
-/* flip in */
+/* ANIMATIONS (FROM ANIMATE.CSS) ========================
+flip in
 @keyframes flipInX {
   0% {
     transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
@@ -213,7 +217,7 @@ textarea.ng-valid.ng-dirty{
   }
 }
 
-/* light speed out */
+light speed out
 @keyframes lightSpeedOut {
   0% {
     opacity: 1;
@@ -238,3 +242,4 @@ textarea.ng-valid.ng-dirty{
     opacity: 0;
   }
 }
+ */

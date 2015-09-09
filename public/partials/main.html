@@ -184,7 +184,10 @@
                 {{ post.date | amCalendar }}
               </time>&nbsp;&nbsp;
 
-              <button ng-click="like(post)"><i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;<p style="display:inline;">{{post.likes.length}}</p></button>&nbsp;&nbsp;
+              <button ng-click="like(post)"><i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;
+                <p ng-show="post.likes.length > 0"style="display:inline;">{{post.likes.length}}</p>
+                <p ng-show="!post.likes.length" style="display:inline;">0</p>
+              </button>&nbsp;&nbsp;
               <button class="viewCommentsButton" ng-click="showComments = !showComments;showAddComment = false;" style="white-space: nowrap;">
                 <i class="fa fa-comment" style="white-space: nowrap;"></i>&nbsp;{{post.comments.length}}
                 <p ng-show="post.comments.length == 1" style="display: inline;">Comment</p>

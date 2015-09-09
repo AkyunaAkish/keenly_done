@@ -22,6 +22,7 @@
     <div class="col-xs-6 col-centered loginDiv">
       <div class="item">
         <div class="content">
+          <h4 ng-show="loginError" style="color:red;">Invalid email or password</h4>
           <h2 class="homeFont">Login</h2><br>
           <p class="homeFont">Email</p>
           <input type="email" name="email" ng-model="user.email" id="email">
@@ -43,14 +44,15 @@
   <div class="row row-centered">
     <div class="col-xs-6 col-centered loginDiv">
       <div class="item"><div class="content">
+        <h4 ng-show="registerError" style="color:red;">Failed to register account</h4>
         <h2 class="homeFont">Register</h2><br>
 
         <p for="email" class="homeFont">Email</p>
         <input type="email" name="email" ng-model="user.email" id="email">
         <br>
-        <p for="username" class="homeFont">Username</p>
-        <input type="text" name="username" ng-model="user.username" id="username">
-        <br>
+      <!--   <p for="username" class="homeFont">Username</p>
+      <input type="text" name="username" ng-model="user.username" id="username">
+      <br> -->
         <p for="password" class="homeFont">Password</p>
         <input type="password" name="password" ng-model="user.password" id="password">
         <br>

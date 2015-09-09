@@ -4,7 +4,10 @@ app.controller('AuthController', function($scope, $location, $firebaseAuth){
 
   $scope.register = function(){
     authObj.$createUser($scope.user).then(function(){
+      $scope.registerError = false;
       $scope.login();
+    }, function(){
+      $scope.registerError = true;
     })
   }
 
@@ -47,10 +50,11 @@ app.controller('AuthController', function($scope, $location, $firebaseAuth){
 
   $scope.login = function(){
     authObj.$authWithPassword($scope.user).then(function(){
+      $scope.loginError = false;
       $location.path('/main');
 
     },function(){
-      alert('Invalid email or password');
+      $scope.loginError = true;
     })
   }
 
@@ -214,7 +218,6 @@ app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$
         var like = post.likes.indexOf(thing);
         post.likes.splice(like,1);
         $scope.posts.$save(post);
-        console.log('Cant like more than once');
       }else{
         post.likes.push(thing);
         $scope.posts.$save(post)
