@@ -64,9 +64,6 @@ app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$
 
   function authDataCallback(authData) {
     if (authData) {
-      // console.log("User " + authData.uid + " is logged in with " + authData.provider);
-      // console.log("AUTHDATA = ", authData);
-      // console.log("AUTHDATA UID = ", authData.uid);
       $scope.loggedUser = authData;
     } else {
       console.log("User is logged out");
@@ -84,9 +81,6 @@ app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$
   $scope.trustSrc = function(src) {
     return $sce.trustAsResourceUrl(src);
   }
-
-  // console.log("AUTHREF ONAUTH = ", authRef.onAuth);
-  // console.log("AUTHOBJ = ", authObj);
 
   authRef.onAuth(authDataCallback);
 
@@ -207,31 +201,25 @@ app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$
   }
 
   $scope.like = function(post){
-    // post.likes++;
     if(post.likes === undefined){
       post.likes = [];
     }
 
     var thing = $scope.loggedUser.uid;
-    console.log("THING = ", thing);
-
     if(post.likes.length == 0){
       post.likes.push(thing);
+      $scope.posts.$save(post)
     }else{
-
-
-      for(i=0;i<post.likes.length;i++){
-        if(post.likes[i] === thing){
-          console.log("Can't like more than once");
-          return false;
-        }else{
-          post.likes.push(thing);
-        }
+      if(post.likes.indexOf(thing) > -1){
+        post.likes.splice(thing);
+        $scope.posts.$save(post);
+        console.log('Cant like more than once');
+      }else{
+        post.likes.push(thing);
+        $scope.posts.$save(post)
       }
-    }
-    // post.likes.push(thing);
 
-    // post.likes.push(authRef.onAuth(authDataCallback));
-    $scope.posts.$save(post)
+    }
+
   }
 }]);
