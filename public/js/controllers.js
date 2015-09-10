@@ -231,21 +231,29 @@ app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$
 }]);
 
 app.controller('ChatController',['$scope','$firebaseArray', '$firebaseAuth', '$location', '$sce',
- function($scope, $firebaseArray, $firebaseAuth, $location, $sce){
 
-   var authRef = new Firebase("https://keenlydone.firebaseio.com");
-   var authObj = $firebaseAuth(authRef);
+function($scope, $firebaseArray, $firebaseAuth, $location, $sce){
 
-   var messagesRef = new Firebase("https://keenlydone.firebaseio.com/messages");
-   //use reference to create synchronized array
-   $scope.messages = $firebaseArray(messagesRef);
+  var authRef = new Firebase("https://keenlydone.firebaseio.com");
+  var authObj = $firebaseAuth(authRef);
 
-   $scope.addMessage = function(){
-     $scope.messages.$add($scope.newMessage).then(function(data){
+  var messagesRef = new Firebase("https://keenlydone.firebaseio.com/messages");
+  //use reference to create synchronized array
+  $scope.messages = $firebaseArray(messagesRef);
 
-     })
-     $scope.newMessage.chatMessage = "";
-   }
+  $scope.addMessage = function(){
+
+    $(".chatP").bind("DOMSubtreeModified",function() {
+      $(".chatP").animate({
+        scrollTop: $(".chatP")[0].scrollHeight
+      });
+    });
+    $scope.messages.$add($scope.newMessage).then(function(data){
+
+    })
+
+    $scope.newMessage.chatMessage = "";
+  }
 
 
-  }]);
+}]);

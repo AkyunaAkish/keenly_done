@@ -251,16 +251,17 @@
     <div class="row row-centered">
       <div class="col-xs-7 col-centered">
         <div class="item">
-          <div class="content chatDiv">
+          <div class="content chatDiv chatP">
             <div ng-repeat="message in messages">
-            <p class="columnText" style="display:inline;margin-bottom:25%;">{{message.chatAuthor}}</p>
-            <p style="display:inline;">{{message.chatMessage}}</p>
+              <p class="columnText" style="display:inline;margin-bottom:25%;">{{message.chatAuthor}}</p>
+              <p style="display:inline;">{{message.chatMessage}}</p>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
   <div class="container clearfix" style="margin-top:-30px;"ng-hide="showChat">
     <div class="row row-centered">
       <div class="col-xs-7 col-centered">
@@ -270,10 +271,10 @@
             <div class="content chatInputs">
               <form name="form" novalidate>
                 <label for="chatAuthor" class="columnText">Author
-                  <input style="color:black;" type="text" id="chatAuthor" ng-model="newMessage.chatAuthor" required>
+                  <input style="color:black;" type="text" id="chatAuthor" ng-model="newMessage.chatAuthor" maxlength="30" required>
                 </label>
                 <label for="chatText" class="columnText">Text
-                  <input style="color:black;" type="text" id="chatText" ng-model="newMessage.chatMessage" required>
+                  <input style="color:black;" type="text" id="chatText" ng-model="newMessage.chatMessage" maxlength="540" required>
                 </label>
                 <button ng-disabled="form.$invalid" ng-click="addMessage();">Submit</button>
               </form>

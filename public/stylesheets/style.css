@@ -28,16 +28,13 @@ body {
   text-align: center;
   border: 1px solid black; }
 
-/* centered columns styles */
 .row-centered {
   text-align: center; }
 
 .col-centered {
   display: inline-block;
   float: none;
-  /* reset the text-align */
   text-align: left;
-  /* inline-block space fix */
   margin-right: -4px; }
 
 .loginDiv {
@@ -47,15 +44,12 @@ body {
   margin: 0 auto; }
 
 .col-fixed {
-  /* custom width */
   width: 320px; }
 
 .col-min {
-  /* custom min width */
   min-width: 320px; }
 
 .col-max {
-  /* custom max width */
   max-width: 320px; }
 
 .col-xs-7.col-centered .item .col-xs-2.col-centered.myIframe {
@@ -112,6 +106,16 @@ button:hover {
   width: 100%;
   background: white; }
 
+.chatP div:nth-child(even) {
+  background: #eeeeee; }
+
+.chatP {
+  overflow: scroll; }
+
+.chatP p {
+  word-wrap: break-word;
+  padding-bottom: 10px; }
+
 .chatInputs {
   text-align: center; }
 
@@ -138,16 +142,6 @@ textarea.ng-invalid.ng-dirty {
 textarea.ng-valid.ng-dirty {
   border-color: #2ecc71; }
 
-/* .ng-hide-add{
-transition:0.75s;
-opacity: 0;
-animation:0.9s lightSpeedOut ease;
-}
-.ng-hide-remove{
-transition:0.75s;
-opacity: 1;
-animation:0.5s flipInX ease;
-} */
 .ng-enter {
   transition: 0.75s;
   opacity: 0; }
@@ -167,67 +161,3 @@ animation:0.5s flipInX ease;
 
 .ng-leave-active {
   opacity: 0; }
-
-/* ANIMATIONS (FROM ANIMATE.CSS) ========================
-flip in
-@keyframes flipInX {
-0% {
-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-transition-timing-function: ease-in;
-opacity: 0;
-}
-
-40% {
-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-transition-timing-function: ease-in;
-transition-timing-function: ease-in;
-}
-
-60% {
-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
-opacity: 1;
-}
-
-80% {
-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-}
-
-100% {
-transform: perspective(400px);
-transform: perspective(400px);
-transform: perspective(400px);
-}
-}
-
-light speed out
-@keyframes lightSpeedOut {
-0% {
-opacity: 1;
-}
-
-100% {
-transform: translate3d(100%, 0, 0) skewX(30deg);
-transform: translate3d(100%, 0, 0) skewX(30deg);
-opacity: 0;
-}
-}
-
-@keyframes lightSpeedOut {
-0% {
-opacity: 1;
-}
-
-100% {
-transform: translate3d(100%, 0, 0) skewX(30deg);
-transform: translate3d(100%, 0, 0) skewX(30deg);
-transform: translate3d(100%, 0, 0) skewX(30deg);
-opacity: 0;
-}
-}
-*/
