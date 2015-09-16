@@ -78,7 +78,8 @@ button:hover {
   word-break: break-all; }
 
 .postContent {
-  background: #97d7f9; }
+  background: #97d7f9;
+  border: 1px solid #389be9; }
 
 .nav-pills {
   background: #b9ecfd; }
@@ -95,6 +96,24 @@ button:hover {
 .postButtons {
   margin-bottom: 10px; }
 
+.descriptionP {
+  overflow: hidden;
+  max-height: 200px; }
+
+.descriptionSharedP {
+  margin-left: 3%;
+  margin-right: 3%;
+  margin-bottom: 3%;
+  text-align: center; }
+
+.authorDiv {
+  margin-left: 3%;
+  margin-right: 3%;
+  margin-top: -3%;
+  margin-bottom: -1%;
+  border-bottom: 1px solid #389be9;
+  text-align: center; }
+
 .chatDiv {
   border: 1px solid #389be9;
   height: 550px;
@@ -105,6 +124,18 @@ button:hover {
   border: 1px solid #389be9;
   width: 100%;
   background: white; }
+
+.postImage {
+  width: 100%;
+  height: 400px; }
+
+.iframeVid {
+  width: 100%;
+  height: 400px; }
+
+.showHideButton {
+  margin-left: 3%;
+  margin-bottom: 3%; }
 
 .chatP div:nth-child(even) {
   background: #eeeeee; }

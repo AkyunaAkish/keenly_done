@@ -77,10 +77,10 @@
                     <h2 class="homeFont"><i class="fa fa-share-alt"></i>&nbsp;Add Post</h2><br>
                     <form name='form' novalidate>
                       <p class="homeFont"><i class="fa fa-user"></i>&nbsp;Author</p>
-                      <input type="text" style="margin-bottom:2%;" ng-model="newPost.author" required>
+                      <input type="text" style="margin-bottom:2%;" ng-model="newPost.author" maxlength="50" required>
                       <br>
                       <p class="homeFont"><i class="fa fa-pencil"></i>&nbsp;Text</p>
-                      <textarea name="text" rows="5" cols="19" style="margin-bottom:2%;resize:none;overflow:scroll;" ng-model="newPost.description" required>
+                      <textarea name="text" rows="5" cols="19" style="margin-bottom:2%;resize:none;overflow:scroll;" ng-model="newPost.description" maxlength="11000" required>
                       </textarea>
                       <br>
                       <h4 class="homeFont"><i class="fa fa-file-code-o"></i>&nbsp;Choose one media type(optional)</h4>
@@ -171,12 +171,20 @@
 
           <div class="row row-centered">
             <div class="col-xs-7 col-centered"><div class="item"><div class="content postContent"><br>
-              &nbsp;&nbsp;&nbsp;&nbsp;<h3 class="columnText" style="display:inline;">{{post.author}}</h3><br><br>
-              &nbsp;&nbsp;&nbsp;&nbsp;<p class="columnText" style="display:inline;">{{post.description}}</p>
-              <!--       <div class="col-xs-2 col-centered myIframe" ng-show="post.videoUrl" ng-bind-html="post.videoUrl"></div> -->
-              <iframe width="100%;" height="400" ng-show="post.videoUrl" ng-src="{{trustSrc(post.videoUrl)}}" class="iframeVid" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><br>
-              <img class="col-xs-2 col-centered" ng-show="post.imageUrl" ng-src="{{post.imageUrl}}" style="width:100%;height:400px;" alt=""><br>
-              <iframe width="100%;" ng-show="post.audioUrl" ng-src="{{trustSrc(post.audioUrl)}}" class="iframeVid" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="authorDiv">
+                <h3 class="columnText" style="display:inline;">{{post.author}}</h3><br><br>
+              </div>
+
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="columnText descriptionP descriptionSharedP" ng-show="!showFullDescription">{{post.description}}</div>
+              <div class="columnText descriptionSharedP" ng-show="showFullDescription">{{post.description}}</div>
+              <button ng-show="!showFullDescription && {{post.description.length}} > 400" ng-click="showFullDescription = true;" class="showHideButton">Show More</button>
+              <button ng-show="showFullDescription" ng-click="showFullDescription = false;" class="showHideButton">Show Less</button>
+              <iframe width="100%;" height="400" ng-show="post.videoUrl" ng-src="{{trustSrc(post.videoUrl)}}" class="iframeVid col-xs-2 col-centered" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><br>
+              <img class="col-xs-2 col-centered postImage" ng-show="post.imageUrl" ng-src="{{post.imageUrl}}" alt=""><br>
+              <iframe width="100%;" ng-show="post.audioUrl" ng-src="{{trustSrc(post.audioUrl)}}" class="col-xs-12 col-centered" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 
               &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-calendar columnText postButtons">&nbsp;</i>
@@ -252,7 +260,7 @@
       <div class="col-xs-7 col-centered">
         <div class="item">
           <div class="content chatDiv chatP">
-            <div ng-repeat="message in messages">
+            <div ng-repeat="message in messages" id="rateplanmapping-scroll">
               <p class="columnText" style="display:inline;margin-bottom:25%;">{{message.chatAuthor}}</p>
               <p style="display:inline;">{{message.chatMessage}}</p>
             </div>
@@ -261,6 +269,7 @@
       </div>
     </div>
   </div>
+
 
   <div class="container clearfix" style="margin-top:-30px;"ng-hide="showChat">
     <div class="row row-centered">
