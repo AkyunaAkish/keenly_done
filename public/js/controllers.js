@@ -248,7 +248,9 @@ function($scope, $firebaseArray, $firebaseAuth, $location, $sce, $anchorScroll){
     //     scrollTop: $(".chatP")[0].scrollHeight
     //   });
     // });
-    $(".chatP").scrollTop($(".chatP")[0].scrollHeight);
+    // $(".chatP").scrollTop($(".chatP")[0].scrollHeight);
+    $scope.glued = true;
+    $scope.newMessage.date = Date.now();
     $scope.messages.$add($scope.newMessage).then(function(data){
 
     })

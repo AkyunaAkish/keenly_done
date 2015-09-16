@@ -114,6 +114,10 @@ button:hover {
   border-bottom: 1px solid #389be9;
   text-align: center; }
 
+.chatMessageAuthor {
+  display: inline;
+  margin-bottom: 25%; }
+
 .chatDiv {
   border: 1px solid #389be9;
   height: 550px;
