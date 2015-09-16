@@ -243,12 +243,12 @@ function($scope, $firebaseArray, $firebaseAuth, $location, $sce, $anchorScroll){
 
   $scope.addMessage = function(){
 
-    // $(".chatP").bind("DOMSubtreeModified",function() {
-    //   $(".chatP").animate({
-    //     scrollTop: $(".chatP")[0].scrollHeight
-    //   });
-    // });
-    $(".chatP").scrollTop($(".chatP")[0].scrollHeight);
+    $(".chatP").bind("DOMSubtreeModified",function() {
+      $(".chatP").animate({
+        scrollTop: $(".chatP")[0].scrollHeight
+      });
+    });
+    // $(".chatP").scrollTop($(".chatP")[0].scrollHeight);
     $scope.messages.$add($scope.newMessage).then(function(data){
 
     })
