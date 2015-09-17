@@ -232,62 +232,47 @@
           </div>
 
 
-          <!--       <div class="container" ng-hide="showChat">
-          <div class="row row-centered">
-          <div class="col-xs-6 col-centered"><div class="item"><div class="content">
-          <textarea name="name" rows="8" cols="40">
-          hi
-        </textarea>
 
-      </div></div></div>
-      <div class="col-xs-6 col-centered"><div class="item"><div class="content"></div></div></div>
-      <div class="col-xs-3 col-centered"><div class="item"><div class="content"></div></div></div>
-      <div class="col-xs-3 col-centered"><div class="item"><div class="content"></div></div></div>
-      <div class="col-xs-3 col-centered"><div class="item"><div class="content"></div></div></div>
-    </div>
-  </div>
--->
+          <div ng-controller="ChatController">
 
-<div ng-controller="ChatController">
-
-  <div class="container clearfix" ng-hide="showChat">
-    <div class="row row-centered">
-      <div class="col-xs-7 col-centered">
-        <div class="item">
-          <div class="content chatDiv chatP" scroll-glue="glued">
-            <div ng-repeat="message in messages">
-              <p class="columnText chatMessageAuthor">{{message.chatAuthor}}</p>
-              <p style="display:inline;">{{message.chatMessage}}</p>
+            <div class="container clearfix" ng-hide="showChat">
+              <div class="row row-centered">
+                <div class="col-xs-7 col-centered">
+                  <div class="item">
+                    <div class="content chatDiv chatP" scroll-glue="glued">
+                      <div ng-repeat="message in messages">
+                        <p class="columnText chatMessageAuthor">{{message.chatAuthor}}</p>
+                        <p style="display:inline;">{{message.chatMessage}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
 
-  <div class="container clearfix" style="margin-top:-30px;"ng-hide="showChat">
-    <div class="row row-centered">
-      <div class="col-xs-7 col-centered">
-        <div class="item">
-          <div class="content chatInputDiv">
+            <div class="container clearfix" style="margin-top:-30px;"ng-hide="showChat">
+              <div class="row row-centered">
+                <div class="col-xs-7 col-centered">
+                  <div class="item">
+                    <div class="content chatInputDiv">
 
-            <div class="content chatInputs">
-              <form name="form" novalidate>
-                <label for="chatAuthor" class="columnText">Author
-                  <input style="color:black;" type="text" id="chatAuthor" ng-model="newMessage.chatAuthor" maxlength="30" required>
-                </label>
-                <label for="chatText" class="columnText">Text
-                  <input style="color:black;" type="text" id="chatText" ng-model="newMessage.chatMessage" maxlength="540" required>
-                </label>
-                <button class="glossy" ng-disabled="form.$invalid" ng-click="addMessage();">Submit</button>
-              </form>
+                      <div class="content chatInputs">
+                        <form name="form" novalidate>
+                          <label for="chatAuthor" class="columnText">Author
+                            <input style="color:black;" type="text" id="chatAuthor" ng-model="newMessage.chatAuthor" maxlength="30" required>
+                          </label>
+                          <label for="chatText" class="columnText">Text
+                            <input style="color:black;" type="text" id="chatText" ng-model="newMessage.chatMessage" maxlength="540" required>
+                          </label>
+                          <button class="glossy" ng-disabled="form.$invalid" ng-click="addMessage();">Submit</button>
+                        </form>
 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-</div>
+          </div>
