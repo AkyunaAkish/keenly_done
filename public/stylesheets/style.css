@@ -66,6 +66,9 @@ body {
 .loginDiv input {
   margin: 0 auto; }
 
+.landingLoginDiv {
+  margin-top: 70px; }
+
 .col-fixed {
   width: 320px; }
 

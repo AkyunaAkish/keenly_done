@@ -19,7 +19,7 @@
 <div class="container.fluid clearfix" ng-hide="hideLogin">
 
   <div class="row row-centered">
-    <div class="col-xs-6 col-centered loginDiv">
+    <div class="col-xs-6 col-centered landingLoginDiv loginDiv">
       <div class="item">
         <div class="content">
           <h4 ng-show="loginError" style="color:red;">Invalid email or password</h4>
@@ -30,8 +30,8 @@
           <p class="homeFont">Password</p>
           <input type="password" name="password" ng-model="user.password" id="password">
           <br>
-          <button ng-click="login()">Login</button><br>
-          <button ng-click="showRegister = true; hideLogin = true;">Register</button>
+          <button ng-click="login()" class="glossy">Login</button><br>
+          <button ng-click="showRegister = true; hideLogin = true;" class="glossy">Register</button>
         </div>
       </div>
     </div>
@@ -42,7 +42,7 @@
 <div class="container.fluid clearfix" ng-show="showRegister">
   <!--   <img src="keenlydonePhraseMedium.png" alt="Failed to load" class="landingPhrase"> -->
   <div class="row row-centered">
-    <div class="col-xs-6 col-centered loginDiv">
+    <div class="col-xs-6 col-centered landingLoginDiv loginDiv">
       <div class="item"><div class="content">
         <h4 ng-show="registerError" style="color:red;">Failed to register account</h4>
         <h2 class="homeFont">Register</h2><br>
@@ -56,8 +56,8 @@
         <p for="password" class="homeFont">Password</p>
         <input type="password" name="password" ng-model="user.password" id="password">
         <br>
-        <button ng-click="register()">Register</button><br>
-        <button ng-click="showRegister = false; hideLogin = false;">Back to Login</button>
+        <button ng-click="register()" class="glossy">Register</button><br>
+        <button ng-click="showRegister = false; hideLogin = false;" class="glossy">Back to Login</button>
       </div>
     </div>
   </div>
