@@ -1,4 +1,6 @@
-<div class="container.fluid clearfix">
+
+
+<div class="container.fluid clearfix topMainDiv">
   <div class="row row-centered">
 
     <div class="col-md-12 landingNav">
@@ -50,25 +52,13 @@
                       ><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</a></li>
 
                     </ul>
-                    <!--   <button ng-init="showHideForm = false;addPostButton = true;" ng-show="addPostButton"
-                    ng-click="showPostForm = !showPostForm;
-                    showHideForm = !showHideForm;addPostButton = !addPostButton">
-                    Add Post</button>&nbsp;
-                    <button ng-show="showHideForm"
-                    ng-click="showPostForm = !showPostForm;
-                    showHideForm = !showHideForm;addPostButton = !addPostButton">
-                    Hide Form</button>
-                    <button ng-show="showChat" ng-click="showChat = !showChat">Chatroom</button>
-                    <button ng-show="!showChat" ng-click="showChat = !showChat">Leave Chat</button>
-                    <button ng-click="logout();" style="float:right;">Logout</button> -->
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
 
-          <div class="container.fluid clearfix" ng-show="showPostForm">
+          <div class="container.fluid clearfix postsContentDiv" ng-show="showPostForm">
 
             <div class="row row-centered">
               <div class="col-xs-6 col-centered loginDiv">
@@ -86,6 +76,7 @@
                       <h4 class="homeFont"><i class="fa fa-file-code-o"></i>&nbsp;Choose one media type(optional)</h4>
 
                       <button
+                      class="glossy"
                       ng-show="backShow"
                       ng-click="
                       vidShow = false;
@@ -102,6 +93,7 @@
                     </button><br ng-show="backShow">
 
                     <button ng-show="yvLink" ng-init="yvLink = true;"
+                    class="glossy yvButton"
                     ng-click="
                     vidShow = true;
                     backShow = true;
@@ -109,9 +101,10 @@
                     imgLink = false;
                     spotLink = false;">
                     <i class="fa fa-youtube"></i>&nbsp;
-                    Youtube/<i class="fa fa-vimeo"></i>&nbsp;Vimeo Link</button><br ng-show="yvLink">
+                    Youtube/<br><i class="fa fa-vimeo"></i>&nbsp;Vimeo Link</button><br ng-show="yvLink">
 
                     <button ng-show="imgLink" ng-init="imgLink = true;"
+                    class="glossy"
                     ng-click="
                     imgShow = true;
                     backShow = true;
@@ -122,6 +115,7 @@
                     <i class="fa fa-picture-o"></i>&nbsp;Image Link</button><br ng-show="imgLink">
 
                     <button ng-show="spotLink" ng-init="spotLink = true;"
+                    class="glossy"
                     ng-click="
                     spotShow = !spotShow;
                     backShow = true;
@@ -143,6 +137,7 @@
 
 
                     <button ng-disabled="form.$invalid"
+                    class="glossy"
                     ng-click="addPost();showPostForm = false;
                     addPostButton = true;showHideForm = false;
                     vidShow = false;
@@ -180,23 +175,23 @@
               &nbsp;&nbsp;&nbsp;&nbsp;
               <div class="columnText descriptionP descriptionSharedP" ng-show="!showFullDescription">{{post.description}}</div>
               <div class="columnText descriptionSharedP" ng-show="showFullDescription">{{post.description}}</div>
-              <button ng-show="!showFullDescription && {{post.description.length}} > 400" ng-click="showFullDescription = true;" class="showHideButton">Show More</button>
-              <button ng-show="showFullDescription" ng-click="showFullDescription = false;" class="showHideButton">Show Less</button>
+              <button ng-show="!showFullDescription && {{post.description.length}} > 400" ng-click="showFullDescription = true;" class="showHideButton glossy">Show More</button>
+              <button ng-show="showFullDescription" ng-click="showFullDescription = false;" class="showHideButton glossy">Show Less</button>
               <iframe width="100%;" height="400" ng-show="post.videoUrl" ng-src="{{trustSrc(post.videoUrl)}}" class="iframeVid col-xs-2 col-centered" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><br>
               <img class="col-xs-2 col-centered postImage" ng-show="post.imageUrl" ng-src="{{post.imageUrl}}" alt=""><br>
               <iframe width="100%;" ng-show="post.audioUrl" ng-src="{{trustSrc(post.audioUrl)}}" class="col-xs-12 col-centered" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 
-              &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-calendar columnText postButtons">&nbsp;</i>
-              <time title="{{ post.date | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}" class="columnText postButtons">
+              &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-calendar dateText postButtons">&nbsp;</i>
+              <time title="{{ post.date | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}" class="dateText postButtons">
                 {{ post.date | amCalendar }}
               </time>&nbsp;&nbsp;
 
-              <button ng-click="like(post)" class="postButtons"><i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;
+              <button ng-click="like(post)" class="postButtons glossy"><i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;
                 <p ng-show="post.likes.length > 0"style="display:inline;">{{post.likes.length}}</p>
                 <p ng-show="!post.likes.length" style="display:inline;">0</p>
               </button>&nbsp;&nbsp;
-              <button class="viewCommentsButton postButtons" ng-click="showComments = !showComments;showAddComment = false;" style="white-space: nowrap;">
+              <button class="viewCommentsButton postButtons glossy" ng-click="showComments = !showComments;showAddComment = false;" style="white-space: nowrap;">
                 <i class="fa fa-comment" style="white-space: nowrap;"></i>&nbsp;
                 <p ng-show="!post.comments.length;"style="display:inline;">0</p>
                 <p ng-show="post.comments.length > 0;"style="display:inline;">{{post.comments.length}}</p>
@@ -204,17 +199,17 @@
                 <p ng-show="post.comments.length == 0 || post.comments.length > 1" style="display: inline;">Comments</p>
               </button>&nbsp;&nbsp;
 
-              <button class="addCommentButton postButtons" ng-click="showAddComment = !showAddComment;showComments = false;">
+              <button class="addCommentButton postButtons glossy" ng-click="showAddComment = !showAddComment;showComments = false;">
                 <i class="fa fa-pencil"></i>&nbsp;Add Comment</button></p>
 
                 <div style="text-align:center;" ng-show="showAddComment">
                   <form name="form" novalidate>
                     <p class="columnText">Author</p>
-                    <input type="text" ng-model="commentAuthor" required><br><br>
+                    <input type="text" ng-model="commentAuthor" maxlength="50" required><br><br>
                     <p class="columnText">Comment</p>
                     <textarea name="name" rows="8" cols="19" style="resize:none;"
-                    ng-model="commentInput" required></textarea><br>
-                    <button ng-disabled="form.$invalid" ng-click="addComment(post,commentAuthor,commentInput);
+                    ng-model="commentInput" max-length="5500" required></textarea><br>
+                    <button class="glossy submitCommentButton" ng-disabled="form.$invalid" ng-click="addComment(post,commentAuthor,commentInput);
                     showAddComment = false;commentAuthor = null;commentInput = null;">Submit Comment</button><br><br>
                   </form>
                 </div>
@@ -285,7 +280,7 @@
                 <label for="chatText" class="columnText">Text
                   <input style="color:black;" type="text" id="chatText" ng-model="newMessage.chatMessage" maxlength="540" required>
                 </label>
-                <button ng-disabled="form.$invalid" ng-click="addMessage();">Submit</button>
+                <button class="glossy" ng-disabled="form.$invalid" ng-click="addMessage();">Submit</button>
               </form>
 
             </div>

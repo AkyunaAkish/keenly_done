@@ -7,7 +7,7 @@ img, embed, object, video {
 
 body {
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  background: #c3ebfd;
+  background: #4152b0;
   width: 100%; }
 
 .clearfix:before, .clearfix:after {
@@ -17,16 +17,39 @@ body {
 .clearfix:after {
   clear: both; }
 
+.commentSection {
+  margin-left: 3%;
+  word-wrap: break-word; }
+
 .clearfix {
   zoom: 1; }
 
+.glossy {
+  overflow: hidden;
+  padding: 0 24px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 1px #154c86;
+  background-color: #4e9fe6;
+  background-clip: padding-box;
+  border: 1px solid;
+  border-color: #1c65b2 #18589c #18589c;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.4), 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.4), 0 1px 2px rgba(0, 0, 0, 0.2);
+  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04)); }
+
 .landingNav {
-  background: #86d7fc; }
+  background: white; }
 
 .landingDivs {
   margin: 0 auto;
   text-align: center;
-  border: 1px solid black; }
+  border: 1px solid white; }
 
 .row-centered {
   text-align: center; }
@@ -78,16 +101,19 @@ button:hover {
   word-break: break-all; }
 
 .postContent {
-  background: #97d7f9;
-  border: 1px solid #389be9; }
+  background: white;
+  border-radius: 20px; }
 
 .nav-pills {
-  background: #b9ecfd; }
+  background: #389be9; }
 
 .nav-pills a {
-  color: #3397ec; }
+  color: white; }
 
 .columnText {
+  color: #389be9; }
+
+.dateText {
   color: #389be9; }
 
 .item {
@@ -106,12 +132,15 @@ button:hover {
   margin-bottom: 3%;
   text-align: center; }
 
+.yvButton {
+  height: 40px; }
+
 .authorDiv {
   margin-left: 3%;
   margin-right: 3%;
   margin-top: -3%;
   margin-bottom: -1%;
-  border-bottom: 1px solid #389be9;
+  border-bottom: 1px solid #3d5bae;
   text-align: center; }
 
 .chatMessageAuthor {
@@ -119,13 +148,13 @@ button:hover {
   margin-bottom: 25%; }
 
 .chatDiv {
-  border: 1px solid #389be9;
+  border: 1px solid white;
   height: 550px;
   width: 100%;
   background: white; }
 
 .chatInputDiv {
-  border: 1px solid #389be9;
+  border: 1px solid white;
   width: 100%;
   background: white; }
 
@@ -140,6 +169,9 @@ button:hover {
 .showHideButton {
   margin-left: 3%;
   margin-bottom: 3%; }
+
+.topMainDiv {
+  border-bottom: 1px solid white; }
 
 .chatP div:nth-child(even) {
   background: #eeeeee; }
@@ -177,22 +209,26 @@ textarea.ng-invalid.ng-dirty {
 textarea.ng-valid.ng-dirty {
   border-color: #2ecc71; }
 
-.ng-enter {
-  transition: 0.75s;
-  opacity: 0; }
+/* .ng-enter{
+transition:0.75s;
+opacity: 0;
+}
+.ng-enter-stagger{
+transition-delay:0.1s;
+}
+.ng-leave-stagger{
+transition-delay:0.1s;
+}
+.ng-enter-active{
+opacity: 1;
+}
 
-.ng-enter-stagger {
-  transition-delay: 0.1s; }
+.ng-leave{
+transition:0.75s;
+opacity: 1;
+}
 
-.ng-leave-stagger {
-  transition-delay: 0.1s; }
-
-.ng-enter-active {
-  opacity: 1; }
-
-.ng-leave {
-  transition: 0.75s;
-  opacity: 1; }
-
-.ng-leave-active {
-  opacity: 0; }
+.ng-leave-active{
+opacity: 0;
+}
+*/

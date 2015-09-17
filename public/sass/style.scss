@@ -8,7 +8,7 @@ img, embed, object, video{
 }
 body{
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  background: rgb(195,235,253);
+  background: rgb(65,82,176);
   width: 100%;
 }
 .clearfix:before, .clearfix:after {
@@ -20,18 +20,43 @@ body{
   clear: both;
 }
 
+.commentSection{
+  margin-left: 3%;
+  word-wrap: break-word;
+}
 .clearfix {
   zoom: 1;
 }
 
+.glossy {
+  overflow: hidden;
+  padding: 0 24px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 1px #154c86;
+  background-color: rgb(78,159,230);
+  background-clip: padding-box;
+  border: 1px solid;
+  border-color: #1c65b2 #18589c #18589c;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.4), 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.4), 0 1px 2px rgba(0, 0, 0, 0.2);
+  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
+}
+
+
 .landingNav{
-  background: rgb(134,215,252);
+  background: white;
 }
 
 .landingDivs{
   margin: 0 auto;
   text-align: center;
-  border: 1px solid black;
+  border: 1px solid white;
 }
 
 .row-centered {
@@ -93,22 +118,25 @@ button:hover{
 }
 
 .postContent{
-  background: rgb(151,215,249);
-  border: 1px solid rgb(56,155,233);
-
-
+  background: white;
+  border-radius: 20px;
 }
 
+
 .nav-pills{
-  background: rgb(185,236,253);
+  background: rgb(56,155,233);
 
 }
 
 .nav-pills a{
-  color: rgb(51,151,236);
+  color: white;
 }
 
 .columnText{
+  color: rgb(56,155,233);
+}
+
+.dateText{
   color: rgb(56,155,233);
 }
 
@@ -131,6 +159,11 @@ button:hover{
   margin-right: 3%;
   margin-bottom: 3%;
   text-align: center;
+
+}
+
+.yvButton{
+  height: 40px;
 }
 
 .authorDiv{
@@ -138,7 +171,7 @@ button:hover{
   margin-right: 3%;
   margin-top: -3%;
   margin-bottom: -1%;
-  border-bottom: 1px solid rgb(56,155,233);
+  border-bottom: 1px solid rgb(61,91,174);
   text-align: center;
 
 }
@@ -148,14 +181,14 @@ button:hover{
 }
 
 .chatDiv{
-  border: 1px solid rgb(56,155,233);
+  border: 1px solid white;
   height: 550px;
   width: 100%;
   background: white;
 }
 
 .chatInputDiv{
-  border: 1px solid rgb(56,155,233);
+  border: 1px solid white;
   width: 100%;
   background: white;
 
@@ -174,6 +207,11 @@ button:hover{
 .showHideButton{
   margin-left: 3%;
   margin-bottom: 3%;
+
+}
+
+.topMainDiv{
+  border-bottom: 1px solid white;
 
 }
 
@@ -225,25 +263,26 @@ textarea.ng-valid.ng-dirty{
   border-color: #2ecc71;
 }
 
-.ng-enter{
-  transition:0.75s;
-  opacity: 0;
+/* .ng-enter{
+transition:0.75s;
+opacity: 0;
 }
 .ng-enter-stagger{
-  transition-delay:0.1s;
+transition-delay:0.1s;
 }
 .ng-leave-stagger{
-  transition-delay:0.1s;
+transition-delay:0.1s;
 }
 .ng-enter-active{
-  opacity: 1;
+opacity: 1;
 }
 
 .ng-leave{
-  transition:0.75s;
-  opacity: 1;
+transition:0.75s;
+opacity: 1;
 }
 
 .ng-leave-active{
-  opacity: 0;
+opacity: 0;
 }
+*/
