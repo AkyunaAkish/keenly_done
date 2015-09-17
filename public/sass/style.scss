@@ -20,6 +20,8 @@ body{
   clear: both;
 }
 
+
+
 .commentSection{
   margin-left: 3%;
   word-wrap: break-word;
@@ -86,6 +88,25 @@ body{
 }
 .col-max {
   max-width:320px;
+}
+
+.landingNav{
+  padding-right:0;
+}
+
+.landingNavSecond{
+  width:100%;
+}
+.loginDiv{
+  background: white;
+  border-radius: 20px;
+}
+.ng-scope{
+  width: 100%;
+}
+
+.buttonNav{
+  padding-right: 0;
 }
 
 .col-xs-7.col-centered .item .col-xs-2.col-centered.myIframe {
