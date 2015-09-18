@@ -87,7 +87,8 @@ body {
 
 .loginDiv {
   background: white;
-  border-radius: 20px; }
+  border-radius: 20px;
+  margin-bottom: 20px; }
 
 .ng-scope {
   width: 100%; }
@@ -168,13 +169,15 @@ button:hover {
   margin-bottom: 25%; }
 
 .chatDiv {
-  border: 1px solid white;
+  border: 3px solid #4e9fe6;
   height: 550px;
   width: 100%;
   background: white; }
 
+.chatForm {
+  border: 3px solid #4e9fe6; }
+
 .chatInputDiv {
-  border: 1px solid white;
   width: 100%;
   background: white; }
 

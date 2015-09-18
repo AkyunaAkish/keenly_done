@@ -50,12 +50,13 @@
         <p for="email" class="homeFont">Email</p>
         <input type="email" name="email" ng-model="user.email" id="email">
         <br>
-      <!--   <p for="username" class="homeFont">Username</p>
-      <input type="text" name="username" ng-model="user.username" id="username">
-      <br> -->
+        <p for="username" class="homeFont">Username</p>
+        <input type="text" name="username" ng-model="accountUsername.username" id="username">
+        <br>
         <p for="password" class="homeFont">Password</p>
         <input type="password" name="password" ng-model="user.password" id="password">
         <br>
+
         <button ng-click="register()" class="glossy">Register</button><br>
         <button ng-click="showRegister = false; hideLogin = false;" class="glossy">Back to Login</button>
       </div>

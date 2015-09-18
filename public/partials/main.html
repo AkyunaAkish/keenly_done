@@ -66,11 +66,8 @@
                   <div class="content">
                     <h2 class="homeFont"><i class="fa fa-share-alt"></i>&nbsp;Add Post</h2><br>
                     <form name='form' novalidate>
-                      <p class="homeFont"><i class="fa fa-user"></i>&nbsp;Author</p>
-                      <input type="text" style="margin-bottom:2%;" ng-model="newPost.author" maxlength="50" required>
-                      <br>
-                      <p class="homeFont"><i class="fa fa-pencil"></i>&nbsp;Text</p>
-                      <textarea name="text" rows="5" cols="19" style="margin-bottom:2%;resize:none;overflow:scroll;" ng-model="newPost.description" maxlength="11000" required>
+                      <p class="homeFont"><i class="fa fa-pencil"></i>&nbsp;Text(optional)</p>
+                      <textarea name="text" rows="5" cols="19" style="margin-bottom:2%;resize:none;overflow:scroll;" ng-model="newPost.description" maxlength="11000">
                       </textarea>
                       <br>
                       <h4 class="homeFont"><i class="fa fa-file-code-o"></i>&nbsp;Choose one media type(optional)</h4>
@@ -100,179 +97,177 @@
                     yvLink = false;
                     imgLink = false;
                     spotLink = false;">
-                    <i class="fa fa-youtube"></i>&nbsp;
-                    Youtube/<br><i class="fa fa-vimeo"></i>&nbsp;Vimeo Link</button><br ng-show="yvLink">
-
-                    <button ng-show="imgLink" ng-init="imgLink = true;"
-                    class="glossy"
-                    ng-click="
-                    imgShow = true;
-                    backShow = true;
-                    imgLink = false;
-                    yvLink = false;
-                    imgLink = false;
-                    spotLink = false;">
-                    <i class="fa fa-picture-o"></i>&nbsp;Image Link</button><br ng-show="imgLink">
-
-                    <button ng-show="spotLink" ng-init="spotLink = true;"
-                    class="glossy"
-                    ng-click="
-                    spotShow = !spotShow;
-                    backShow = true;
-                    spotLink = false;
-                    yvLink = false;
-                    imgLink = false;
-                    spotLink = false;">
-                    <i class="fa fa-spotify"></i>&nbsp;Spotify Link</button><br ng-show="spotLink">
-
-                    <br><p class="homeFont" ng-show="vidShow"><i class="fa fa-youtube"></i>&nbsp;Youtube or <i class="fa fa-vimeo"></i>&nbsp;Vimeo URL(optional)</p>
-                    <input type="text" ng-show="vidShow" style="margin-bottom:2%;" ng-model="newPost.videoUrl">
-                    <br ng-show="vidShow">
-                    <p class="homeFont" ng-show="imgShow"><i class="fa fa-picture-o"></i>&nbsp;Image URL(optional)</p>
-                    <input type="text" ng-show="imgShow" style="margin-bottom:2%;" ng-model="newPost.imageUrl">
-                    <br ng-show="imgShow">
-                    <p class="homeFont" ng-show="spotShow"><i class="fa fa-spotify"></i>&nbsp;Spotify URL(optional)</p>
-                    <input type="text" ng-show="spotShow"style="margin-bottom:2%;" ng-model="newPost.audioUrl">
-                    <br ng-show="spotShow">
+                    <i class="fa fa-youtube-square"></i>&nbsp;
+                    Youtube Link/<br><i class="fa fa-vimeo"></i>&nbsp;Vimeo Link<br>
+                  </button><br ng-show="yvLink">
 
 
-                    <button ng-disabled="form.$invalid"
-                    class="glossy"
-                    ng-click="addPost();showPostForm = false;
-                    addPostButton = true;showHideForm = false;
-                    vidShow = false;
-                    imgShow = false;
-                    spotShow = false;
-                    backShow = false;
-                    yvLink = true;
-                    imgLink = true;
-                    spotLink = true;
-                    newPost.videoUrl = null;
-                    newPost.audioUrl = null;
-                    newPost.imageUrl = null;
-                    "><i class="fa fa-check-circle-o"></i>&nbsp;Confirm Post</button><br>
 
-                  </form>
-                </div>
+                  <button ng-show="imgLink" ng-init="imgLink = true;"
+                  class="glossy"
+                  ng-click="
+                  imgShow = true;
+                  backShow = true;
+                  imgLink = false;
+                  yvLink = false;
+                  imgLink = false;
+                  spotLink = false;">
+                  <i class="fa fa-picture-o"></i>&nbsp;Image Link</button><br ng-show="imgLink">
+
+                  <button ng-show="spotLink" ng-init="spotLink = true;"
+                  class="glossy"
+                  ng-click="
+                  spotShow = !spotShow;
+                  backShow = true;
+                  spotLink = false;
+                  yvLink = false;
+                  imgLink = false;
+                  spotLink = false;">
+                  <i class="fa fa-spotify"></i>&nbsp;Spotify Link</button><br ng-show="spotLink">
+
+                  <br><p class="homeFont" ng-show="vidShow"><i class="fa fa-youtube"></i>&nbsp;Youtube or <i class="fa fa-vimeo"></i>&nbsp;Vimeo URL(optional)</p>
+                  <input type="text" ng-show="vidShow" style="margin-bottom:2%;" ng-model="newPost.videoUrl">
+                  <br ng-show="vidShow">
+                  <p class="homeFont" ng-show="imgShow"><i class="fa fa-picture-o"></i>&nbsp;Image URL(optional)</p>
+                  <input type="text" ng-show="imgShow" style="margin-bottom:2%;" ng-model="newPost.imageUrl">
+                  <br ng-show="imgShow">
+                  <p class="homeFont" ng-show="spotShow"><i class="fa fa-spotify"></i>&nbsp;Spotify URL(optional)</p>
+                  <input type="text" ng-show="spotShow"style="margin-bottom:2%;" ng-model="newPost.audioUrl">
+                  <br ng-show="spotShow">
+
+
+                  <button ng-disabled="form.$invalid"
+                  class="glossy"
+                  ng-click="addPost();showPostForm = false;
+                  addPostButton = true;showHideForm = false;
+                  vidShow = false;
+                  imgShow = false;
+                  spotShow = false;
+                  backShow = false;
+                  yvLink = true;
+                  imgLink = true;
+                  spotLink = true;
+                  newPost.videoUrl = null;
+                  newPost.audioUrl = null;
+                  newPost.imageUrl = null;
+                  "><i class="fa fa-check-circle-o"></i>&nbsp;Confirm Post</button><br>
+
+                </form>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div class="container" ng-hide="!showChat" ng-repeat="post in posts | orderBy: '-date'">
+
+        <div class="row row-centered">
+          <div class="col-xs-7 col-centered"><div class="item"><div class="content postContent"><br>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="authorDiv">
+              <h3 class="columnText" style="display:inline;">{{post.author}}</h3><br><br>
+            </div>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="columnText descriptionP descriptionSharedP" ng-show="!showFullDescription">{{post.description}}</div>
+            <div class="columnText descriptionSharedP" ng-show="showFullDescription">{{post.description}}</div>
+            <button ng-show="!showFullDescription && {{post.description.length}} > 400" ng-click="showFullDescription = true;" class="showHideButton glossy">Show More</button>
+            <button ng-show="showFullDescription" ng-click="showFullDescription = false;" class="showHideButton glossy">Show Less</button>
+            <iframe width="100%;" height="400" ng-show="post.videoUrl" ng-src="{{trustSrc(post.videoUrl)}}" class="iframeVid col-xs-2 col-centered" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><br>
+            <img class="col-xs-2 col-centered postImage" ng-show="post.imageUrl" ng-src="{{post.imageUrl}}" alt=""><br>
+            <iframe width="100%;" ng-show="post.audioUrl" ng-src="{{trustSrc(post.audioUrl)}}" class="col-xs-12 col-centered" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+
+            &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-calendar dateText postButtons">&nbsp;</i>
+            <time title="{{ post.date | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}" class="dateText postButtons">
+              {{ post.date | amCalendar }}
+            </time>&nbsp;&nbsp;
+
+            <button ng-click="like(post)" class="postButtons glossy"><i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;
+              <p ng-show="post.likes.length > 0"style="display:inline;">{{post.likes.length}}</p>
+              <p ng-show="!post.likes.length" style="display:inline;">0</p>
+            </button>&nbsp;&nbsp;
+            <button class="viewCommentsButton postButtons glossy" ng-click="showComments = !showComments;showAddComment = false;" style="white-space: nowrap;">
+              <i class="fa fa-comment" style="white-space: nowrap;"></i>&nbsp;
+              <p ng-show="!post.comments.length;"style="display:inline;">0</p>
+              <p ng-show="post.comments.length > 0;"style="display:inline;">{{post.comments.length}}</p>
+              <p ng-show="post.comments.length == 1" style="display: inline;">Comment</p>
+              <p ng-show="post.comments.length == 0 || post.comments.length > 1" style="display: inline;">Comments</p>
+            </button>&nbsp;&nbsp;
+
+            <button class="addCommentButton postButtons glossy" ng-click="showAddComment = !showAddComment;showComments = false;">
+              <i class="fa fa-pencil"></i>&nbsp;Add Comment</button></p>
+
+              <div style="text-align:center;" ng-show="showAddComment">
+                <form name="form" novalidate>
+                  <p class="columnText">Comment</p>
+                  <textarea name="name" rows="8" cols="19" style="resize:none;"
+                  ng-model="commentInput" max-length="5500" required></textarea><br>
+                  <button class="glossy submitCommentButton" ng-disabled="form.$invalid" ng-click="addComment(post,commentAuthor,commentInput);
+                  showAddComment = false;commentAuthor = null;commentInput = null;">Submit Comment</button><br><br>
+                </form>
+              </div>
+
+              <div class="commentSection" ng-show="showComments"
+              ng-repeat="comment in post.comments">
+              <p class="commentAndAuthorP columnText" style="display:inline;">
+                &nbsp;&nbsp;&nbsp;&nbsp;<b>{{comment.commentAuthor}}&nbsp;</b>
+                <p style="display:inline;">{{comment.commentInput}}</p></p>
+
+              </div>
+
+
+
+            </div></div></div>
+
+
+
           </div>
         </div>
 
 
 
+        <div ng-controller="ChatController">
 
-        <div class="container" ng-hide="!showChat" ng-repeat="post in posts | orderBy: '-date'">
-
-          <div class="row row-centered">
-            <div class="col-xs-7 col-centered"><div class="item"><div class="content postContent"><br>
-
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <div class="authorDiv">
-                <h3 class="columnText" style="display:inline;">{{post.author}}</h3><br><br>
-              </div>
-
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <div class="columnText descriptionP descriptionSharedP" ng-show="!showFullDescription">{{post.description}}</div>
-              <div class="columnText descriptionSharedP" ng-show="showFullDescription">{{post.description}}</div>
-              <button ng-show="!showFullDescription && {{post.description.length}} > 400" ng-click="showFullDescription = true;" class="showHideButton glossy">Show More</button>
-              <button ng-show="showFullDescription" ng-click="showFullDescription = false;" class="showHideButton glossy">Show Less</button>
-              <iframe width="100%;" height="400" ng-show="post.videoUrl" ng-src="{{trustSrc(post.videoUrl)}}" class="iframeVid col-xs-2 col-centered" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><br>
-              <img class="col-xs-2 col-centered postImage" ng-show="post.imageUrl" ng-src="{{post.imageUrl}}" alt=""><br>
-              <iframe width="100%;" ng-show="post.audioUrl" ng-src="{{trustSrc(post.audioUrl)}}" class="col-xs-12 col-centered" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-
-
-              &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-calendar dateText postButtons">&nbsp;</i>
-              <time title="{{ post.date | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}" class="dateText postButtons">
-                {{ post.date | amCalendar }}
-              </time>&nbsp;&nbsp;
-
-              <button ng-click="like(post)" class="postButtons glossy"><i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;
-                <p ng-show="post.likes.length > 0"style="display:inline;">{{post.likes.length}}</p>
-                <p ng-show="!post.likes.length" style="display:inline;">0</p>
-              </button>&nbsp;&nbsp;
-              <button class="viewCommentsButton postButtons glossy" ng-click="showComments = !showComments;showAddComment = false;" style="white-space: nowrap;">
-                <i class="fa fa-comment" style="white-space: nowrap;"></i>&nbsp;
-                <p ng-show="!post.comments.length;"style="display:inline;">0</p>
-                <p ng-show="post.comments.length > 0;"style="display:inline;">{{post.comments.length}}</p>
-                <p ng-show="post.comments.length == 1" style="display: inline;">Comment</p>
-                <p ng-show="post.comments.length == 0 || post.comments.length > 1" style="display: inline;">Comments</p>
-              </button>&nbsp;&nbsp;
-
-              <button class="addCommentButton postButtons glossy" ng-click="showAddComment = !showAddComment;showComments = false;">
-                <i class="fa fa-pencil"></i>&nbsp;Add Comment</button></p>
-
-                <div style="text-align:center;" ng-show="showAddComment">
-                  <form name="form" novalidate>
-                    <p class="columnText">Author</p>
-                    <input type="text" ng-model="commentAuthor" maxlength="50" required><br><br>
-                    <p class="columnText">Comment</p>
-                    <textarea name="name" rows="8" cols="19" style="resize:none;"
-                    ng-model="commentInput" max-length="5500" required></textarea><br>
-                    <button class="glossy submitCommentButton" ng-disabled="form.$invalid" ng-click="addComment(post,commentAuthor,commentInput);
-                    showAddComment = false;commentAuthor = null;commentInput = null;">Submit Comment</button><br><br>
-                  </form>
-                </div>
-
-                <div class="commentSection" ng-show="showComments"
-                ng-repeat="comment in post.comments">
-                <p class="commentAndAuthorP columnText" style="display:inline;">
-                  &nbsp;&nbsp;&nbsp;&nbsp;<b>{{comment.commentAuthor}}&nbsp;</b>
-                  <p style="display:inline;">{{comment.commentInput}}</p></p>
-
-                </div>
-
-
-
-              </div></div></div>
-
-
-
-            </div>
-          </div>
-
-
-
-          <div ng-controller="ChatController">
-
-            <div class="container clearfix" ng-hide="showChat">
-              <div class="row row-centered">
-                <div class="col-xs-7 col-centered">
-                  <div class="item">
-                    <div class="content chatDiv chatP" scroll-glue="glued">
-                      <div ng-repeat="message in messages">
-                        <p class="columnText chatMessageAuthor">{{message.chatAuthor}}</p>
-                        <p style="display:inline;">{{message.chatMessage}}</p>
-                      </div>
+          <div class="container clearfix" ng-hide="showChat">
+            <div class="row row-centered">
+              <div class="col-xs-7 col-centered">
+                <div class="item">
+                  <div class="content chatDiv chatP" scroll-glue="glued">
+                    <div ng-repeat="message in messages">
+                      <p class="columnText chatMessageAuthor">{{message.chatAuthor}}</p>
+                      <p style="display:inline;">{{message.chatMessage}}</p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
 
-            <div class="container clearfix" style="margin-top:-30px;"ng-hide="showChat">
-              <div class="row row-centered">
-                <div class="col-xs-7 col-centered">
-                  <div class="item">
-                    <div class="content chatInputDiv">
+          <div class="container clearfix" style="margin-top:-30px;"ng-hide="showChat">
+            <div class="row row-centered">
+              <div class="col-xs-7 col-centered">
+                <div class="item">
+                  <div class="content chatInputDiv">
 
-                      <div class="content chatInputs">
-                        <form name="form" novalidate>
-                          <label for="chatAuthor" class="columnText">Author
-                            <input style="color:black;" type="text" id="chatAuthor" ng-model="newMessage.chatAuthor" maxlength="30" required>
-                          </label>
-                          <label for="chatText" class="columnText">Text
-                            <input style="color:black;" type="text" id="chatText" ng-model="newMessage.chatMessage" maxlength="540" required>
-                          </label>
-                          <button class="glossy" ng-disabled="form.$invalid" ng-click="addMessage();">Submit</button>
-                        </form>
+                    <div class="content chatInputs">
+                      <form name="form" class="chatForm" novalidate>
+                        <label for="chatText" class="columnText">Message
+                          <input style="color:black;" type="text" id="chatText" ng-model="newMessage.chatMessage" maxlength="540" required>
+                        </label>
+                        <button class="glossy" ng-disabled="form.$invalid" ng-click="addMessage();">Submit</button>
+                      </form>
 
-                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
           </div>
+
+        </div>

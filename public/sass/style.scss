@@ -31,6 +31,8 @@ body{
   zoom: 1;
 }
 
+
+
 .glossy {
   overflow: hidden;
   padding: 0 24px;
@@ -105,6 +107,7 @@ margin-top: 70px;
 .loginDiv{
   background: white;
   border-radius: 20px;
+  margin-bottom: 20px;
 }
 .ng-scope{
   width: 100%;
@@ -190,6 +193,7 @@ button:hover{
 
 .yvButton{
   height: 40px;
+
 }
 
 .authorDiv{
@@ -207,14 +211,17 @@ button:hover{
 }
 
 .chatDiv{
-  border: 1px solid white;
+  border: 3px solid rgb(78,159,230);
   height: 550px;
   width: 100%;
   background: white;
 }
 
+.chatForm{
+  border: 3px solid rgb(78,159,230);
+}
+
 .chatInputDiv{
-  border: 1px solid white;
   width: 100%;
   background: white;
 

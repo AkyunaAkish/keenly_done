@@ -1,58 +1,31 @@
-app.controller('AuthController', function($scope, $location, $firebaseAuth){
+app.controller('AuthController', function($scope, $location, $firebaseAuth, $firebaseArray){
   var authRef = new Firebase("https://keenlydone.firebaseio.com");
   var authObj = $firebaseAuth(authRef);
 
+  var usernamesRef = new Firebase("https://keenlydone.firebaseio.com/usernames");
+  //use reference to create synchronized array
+  $scope.usernames = $firebaseArray(usernamesRef);
+
+
   $scope.register = function(){
+    $scope.accountUsername.emailRef = $scope.user.email;
+    $scope.usernames.$add($scope.accountUsername).then(function(data){
+    })
     authObj.$createUser($scope.user).then(function(){
       $scope.registerError = false;
       $scope.login();
     }, function(){
       $scope.registerError = true;
     })
+
   }
 
-  // $scope.register = function(){
-  //   authRef.createUser({
-  //   email    : $scope.user.email,
-  //   password : $scope.user.password,
-  //   username: $scope.user.username
-  // }, function(error, userData) {
-  //   if (error) {
-  //     console.log("Error creating user:", error);
-  //   } else {
-  //     console.log(userData);
-  //     // save the user's profile into the database so we can list users,
-  //     // use them in Security and Firebase Rules, and show profiles
-  //     authRef.child("users").child(userData.uid).set({
-  //       // provider: userData.provider,
-  //       name: $scope.user.username
-  //     });
-  //     $scope.login();
-  //   }
-  // });
-  // }
-
-  // $scope.register = function(){
-  //   var q = authRef.child('users').orderByChild('username').equalTo($scope.user.username);
-  //   q.once('value', function(snapshot) {
-  //     if (snapshot.val() === null) {
-  //       // username does not yet exist, go ahead and add new user
-  //       authObj.$createUser($scope.user).then(function(){
-  //           $scope.login();
-  //         })
-  //     } else {
-  //       // username already exists, ask user for a different name
-  //       alert('Username taken');
-  //     }
-  //   });
-  // }
 
 
   $scope.login = function(){
-    authObj.$authWithPassword($scope.user).then(function(){
+    authObj.$authWithPassword($scope.user).then(function(user){
       $scope.loginError = false;
       $location.path('/main');
-
     },function(){
       $scope.loginError = true;
     })
@@ -64,7 +37,7 @@ app.controller('AuthController', function($scope, $location, $firebaseAuth){
 })
 
 app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$location', '$sce', function($scope, $firebaseArray, $firebaseAuth, $location, $sce){
-  $scope.loggedUser = {};
+
 
   function authDataCallback(authData) {
     if (authData) {
@@ -76,11 +49,15 @@ app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$
 
 
   var authRef = new Firebase("https://keenlydone.firebaseio.com");
+
   var authObj = $firebaseAuth(authRef);
   //create reference
   var postsRef = new Firebase("https://keenlydone.firebaseio.com/posts");
   //use reference to create synchronized array
   $scope.posts = $firebaseArray(postsRef);
+
+  var usernamesRef = new Firebase("https://keenlydone.firebaseio.com/usernames");
+  $scope.usernames = $firebaseArray(usernamesRef);
 
   $scope.trustSrc = function(src) {
     return $sce.trustAsResourceUrl(src);
@@ -130,15 +107,24 @@ app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$
 
 
 
+    var authData = authObj.$getAuth();
 
+    if (authData) {
+      for (var i = 0; i < $scope.usernames.length; i++) {
+        if(authData.password.email === $scope.usernames[i].emailRef)
+        $scope.newPost.author = $scope.usernames[i].username;
+      }
+    } else {
+      console.log("Logged out");
+    }
 
 
     $scope.posts.$add($scope.newPost).then(function(data){
-
     })
 
+
     $scope.newPost.title = "";
-    $scope.newPost.author = "";
+    // $scope.newPost.author = "";
     $scope.newPost.description = "";
     $scope.newPost.imageUrl = "";
     $scope.newPost.videoUrl = "";
@@ -196,8 +182,24 @@ app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$
     if(post.comments === undefined){
       post.comments = [];
     }
+
+
+
     var commentObj = {};
-    commentObj.commentAuthor = commentAuthor;
+
+
+    var authData = authObj.$getAuth();
+
+    if (authData) {
+      for (var i = 0; i < $scope.usernames.length; i++) {
+        if(authData.password.email === $scope.usernames[i].emailRef)
+        commentObj.commentAuthor = $scope.usernames[i].username;
+      }
+    } else {
+      console.log("Logged out");
+    }
+
+    // commentObj.commentAuthor = commentAuthor;
     commentObj.commentInput = commentInput;
     post.comments.push(commentObj);
 
@@ -241,16 +243,22 @@ function($scope, $firebaseArray, $firebaseAuth, $location, $sce, $anchorScroll){
   //use reference to create synchronized array
   $scope.messages = $firebaseArray(messagesRef);
 
+  var usernamesRef = new Firebase("https://keenlydone.firebaseio.com/usernames");
+  $scope.usernames = $firebaseArray(usernamesRef);
+
   $scope.addMessage = function(){
-    //
-    // $(".chatP").bind("DOMSubtreeModified",function() {
-    //   $(".chatP").animate({
-    //     scrollTop: $(".chatP")[0].scrollHeight
-    //   });
-    // });
-    // $(".chatP").scrollTop($(".chatP")[0].scrollHeight);
     $scope.glued = true;
     $scope.newMessage.date = Date.now();
+    var authData = authObj.$getAuth();
+
+    if (authData) {
+      for (var i = 0; i < $scope.usernames.length; i++) {
+        if(authData.password.email === $scope.usernames[i].emailRef)
+        $scope.newMessage.chatAuthor = $scope.usernames[i].username;
+      }
+    } else {
+      console.log("Logged out");
+    }
     $scope.messages.$add($scope.newMessage).then(function(data){
 
     })
