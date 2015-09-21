@@ -1,4 +1,4 @@
-app.controller('AuthController', function($scope, $location, $firebaseAuth, $firebaseArray){
+app.controller('AuthController', function($scope, $location, $firebaseAuth, $firebaseArray, $q){
   var authRef = new Firebase("https://keenlydone.firebaseio.com");
   var authObj = $firebaseAuth(authRef);
 
@@ -8,15 +8,78 @@ app.controller('AuthController', function($scope, $location, $firebaseAuth, $fir
 
 
   $scope.register = function(){
-    $scope.accountUsername.emailRef = $scope.user.email;
-    $scope.usernames.$add($scope.accountUsername).then(function(data){
-    })
-    authObj.$createUser($scope.user).then(function(){
-      $scope.registerError = false;
-      $scope.login();
-    }, function(){
-      $scope.registerError = true;
-    })
+
+    // $scope.registerError = false;
+    $scope.registerUsernameError = false;
+
+
+    if($scope.usernames.length === 0){
+      $scope.user.email = $scope.user.email.toLowerCase();
+      $scope.accountUsername.emailRef = $scope.user.email;
+      $scope.accountUsername.username = $scope.accountUsername.username.toLowerCase();
+      $scope.usernames.$add($scope.accountUsername).then(function(data){
+      })
+      authObj.$createUser($scope.user).then(function(){
+        $scope.registerError = false;
+        $scope.login();
+      }, function(){
+        // $scope.registerError = true;
+        $scope.registerUsernameError = true;
+      })
+    }
+    else{
+      var promise = new Promise(function(resolve, reject) {
+
+        for (var i = 0; i < $scope.usernames.length; i++) {
+          if($scope.usernames[i].username === $scope.accountUsername.username && $scope.usernames[i].emailRef === $scope.user.email ||  $scope.usernames[i].emailRef === $scope.user.email || $scope.usernames[i].username === $scope.accountUsername.username){
+            var hasAMatch = true;
+            break;
+          }
+        }
+        if (!hasAMatch) {
+          resolve("");
+        }
+        else {
+          $scope.registerUsernameError = true;
+          reject(Error(""));
+        }
+      });
+
+      promise.then(function(result) {
+        $scope.user.email = $scope.user.email.toLowerCase();
+        $scope.accountUsername.emailRef = $scope.user.email;
+        $scope.accountUsername.username = $scope.accountUsername.username.toLowerCase();
+        $scope.usernames.$add($scope.accountUsername).then(function(data){
+        })
+
+        authObj.$createUser($scope.user).then(function(){
+          $scope.registerError = false;
+          $scope.login();
+        }, function(){
+          // $scope.registerError = true;
+          $scope.registerUsernameError = true;
+        })
+        console.log('Result',result); // "Stuff worked!"
+      }, function(err) {
+        console.log('Error',err); // Error: "It broke"
+      });
+
+
+
+    }
+
+    // $scope.accountUsername.emailRef = $scope.user.email;
+    // $scope.usernames.$add($scope.accountUsername).then(function(data){
+    // })
+    // authObj.$createUser($scope.user).then(function(){
+    //   $scope.registerError = false;
+    //   $scope.login();
+    // }, function(){
+    //   $scope.registerError = true;
+    // })
+    //
+    // }
+
 
   }
 
