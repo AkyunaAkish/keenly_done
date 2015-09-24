@@ -23,7 +23,9 @@ body{
 
 
 .commentSection{
+
   margin-left: 3%;
+  max-width: 97%;
   word-wrap: break-word;
   padding-bottom: 5px;
 }
@@ -150,8 +152,15 @@ button:hover{
   background: white;
   border-radius: 20px;
 }
-
-
+/* html{
+    max-width: 100%;
+} */
+/* .ng-scope{
+  max-width: 100%;
+} */
+/* .firstButtonNav{
+  max-width: 100% !important;
+} */
 .nav-pills{
   background: rgb(56,155,233);
 

@@ -18,7 +18,7 @@
 
 
 
-<div class="container.fluid buttonNav">
+<div class="container.fluid buttonNav firstButtonNav">
   <div class="row row-centered buttonNav">
     <div class="col-xs-12 buttonNav">
       <div class="item buttonNav">
@@ -172,7 +172,7 @@
 
             &nbsp;&nbsp;&nbsp;&nbsp;
             <div class="columnText descriptionP descriptionSharedP" ng-show="!showFullDescription">{{post.description}}</div>
-            <div class="columnText descriptionSharedP" ng-show="showFullDescription">{{post.description}}</div>
+            <div class="columnText descriptionSharedP" ng-show="showFullDescription">{{trustSrc(post.description)}}</div>
             <button ng-show="!showFullDescription && {{post.description.length}} > 400" ng-click="showFullDescription = true;" class="showHideButton glossy">Show More</button>
             <button ng-show="showFullDescription" ng-click="showFullDescription = false;" class="showHideButton glossy">Show Less</button>
             <iframe width="100%;" height="400" ng-show="post.videoUrl" ng-src="{{trustSrc(post.videoUrl)}}" class="iframeVid col-xs-2 col-centered" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><br>
