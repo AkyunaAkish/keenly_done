@@ -209,31 +209,40 @@ button:hover {
 .chatInputs {
   text-align: center; }
 
-form[novalidate] input {
+/* form[novalidate] input{
   border-left-width: 8px;
   border-color: #3498db;
-  border-style: solid; }
+  border-style: solid;
+}
+input[required].ng-pristine{
+  border-color: #e74c3c;
+}
 
-input[required].ng-pristine {
-  border-color: #e74c3c; }
+input.ng-invalid.ng-dirty{
+  border-color: #e74c3c;
+}
 
-input.ng-invalid.ng-dirty {
-  border-color: #e74c3c; }
+input.ng-valid.ng-dirty{
+  border-color: #2ecc71;
+}
 
-input.ng-valid.ng-dirty {
-  border-color: #2ecc71; }
 
-textarea[required].ng-pristine {
-  border-color: #e74c3c; }
 
-textarea.ng-invalid.ng-dirty {
-  border-color: #e74c3c; }
 
-textarea.ng-valid.ng-dirty {
-  border-color: #2ecc71; }
+textarea[required].ng-pristine{
+  border-color: #e74c3c;
+}
 
+textarea.ng-invalid.ng-dirty{
+  border-color: #e74c3c;
+}
+
+textarea.ng-valid.ng-dirty{
+  border-color: #2ecc71;
+}
+ */
 /* .ng-enter{
-transition:0.75s;
+transition:2.15s;
 opacity: 0;
 }
 .ng-enter-stagger{
@@ -247,11 +256,11 @@ opacity: 1;
 }
 
 .ng-leave{
-transition:0.75s;
+transition:2.15s;
 opacity: 1;
 }
 
 .ng-leave-active{
 opacity: 0;
 }
-*/
+ */

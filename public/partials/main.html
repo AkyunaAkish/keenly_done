@@ -18,8 +18,6 @@
 
 
 
-
-
 <div class="container.fluid buttonNav">
   <div class="row row-centered buttonNav">
     <div class="col-xs-12 buttonNav">
@@ -31,7 +29,7 @@
               ng-init="showHideForm = false;addPostButton = true;" ng-show="addPostButton"
               ng-click="showPostForm = !showPostForm;
               showHideForm = !showHideForm;addPostButton = !addPostButton;
-              showChat = true;"
+              showChat = true;addPostError = false;"
               > <span class="glyphicon glyphicon-plus"></span>&nbsp;Add Post</a></li>
               <li><a
                 ng-show="showHideForm"
@@ -66,6 +64,7 @@
                   <div class="content">
                     <h2 class="homeFont"><i class="fa fa-share-alt"></i>&nbsp;Add Post</h2><br>
                     <form name='form' novalidate>
+                      <h4 class="homeFont" ng-show="addPostError" style="color:red">Please fill in at least 1 input field before posting</h4>
                       <p class="homeFont"><i class="fa fa-pencil"></i>&nbsp;Text(optional)</p>
                       <textarea name="text" rows="5" cols="19" style="margin-bottom:2%;resize:none;overflow:scroll;" ng-model="newPost.description" maxlength="11000">
                       </textarea>
@@ -112,7 +111,7 @@
                   yvLink = false;
                   imgLink = false;
                   spotLink = false;">
-                  <i class="fa fa-picture-o"></i>&nbsp;Image Link</button><br ng-show="imgLink">
+                  <i class="fa fa-picture-o"></i>&nbsp;Image/Gif Link</button><br ng-show="imgLink">
 
                   <button ng-show="spotLink" ng-init="spotLink = true;"
                   class="glossy"
@@ -128,7 +127,7 @@
                   <br><p class="homeFont" ng-show="vidShow"><i class="fa fa-youtube"></i>&nbsp;Youtube or <i class="fa fa-vimeo"></i>&nbsp;Vimeo URL(optional)</p>
                   <input type="text" ng-show="vidShow" style="margin-bottom:2%;" ng-model="newPost.videoUrl">
                   <br ng-show="vidShow">
-                  <p class="homeFont" ng-show="imgShow"><i class="fa fa-picture-o"></i>&nbsp;Image URL(optional)</p>
+                  <p class="homeFont" ng-show="imgShow"><i class="fa fa-picture-o"></i>&nbsp;Image or Gif URL(optional)</p>
                   <input type="text" ng-show="imgShow" style="margin-bottom:2%;" ng-model="newPost.imageUrl">
                   <br ng-show="imgShow">
                   <p class="homeFont" ng-show="spotShow"><i class="fa fa-spotify"></i>&nbsp;Spotify URL(optional)</p>
@@ -138,8 +137,7 @@
 
                   <button ng-disabled="form.$invalid"
                   class="glossy"
-                  ng-click="addPost();showPostForm = false;
-                  addPostButton = true;showHideForm = false;
+                  ng-click="addPost();
                   vidShow = false;
                   imgShow = false;
                   spotShow = false;
@@ -200,74 +198,116 @@
             </button>&nbsp;&nbsp;
 
             <button class="addCommentButton postButtons glossy" ng-click="showAddComment = !showAddComment;showComments = false;">
-              <i class="fa fa-pencil"></i>&nbsp;Add Comment</button></p>
+              <i class="fa fa-pencil"></i>&nbsp;Add Comment</button>
+              <button class="deletePostButton postButtons glossy" ng-show="post.emailReference == currentUserEmail" ng-click="removePost(post)">
+                <i class="fa fa-minus-circle"></i>&nbsp;Delete Post</button>
+                <!--     <button class="editPostButton postButtons glossy" ng-click="showPost(post);setActive(post)">
+                <i class="fa fa-pencil-square-o"></i>&nbsp;Edit Post</button> -->
 
-              <div style="text-align:center;" ng-show="showAddComment">
-                <form name="form" novalidate>
-                  <p class="columnText">Comment</p>
-                  <textarea name="name" rows="8" cols="19" style="resize:none;"
-                  ng-model="commentInput" max-length="5500" required></textarea><br>
-                  <button class="glossy submitCommentButton" ng-disabled="form.$invalid" ng-click="addComment(post,commentAuthor,commentInput);
-                  showAddComment = false;commentAuthor = null;commentInput = null;">Submit Comment</button><br><br>
-                </form>
-              </div>
+              </p>
+            </p>
 
-              <div class="commentSection" ng-show="showComments"
-              ng-repeat="comment in post.comments">
-              <p class="commentAndAuthorP columnText" style="display:inline;">
-                &nbsp;&nbsp;&nbsp;&nbsp;<b>{{comment.commentAuthor}}&nbsp;</b>
-                <p style="display:inline;">{{comment.commentInput}}</p></p>
-
-              </div>
-
-
-
-            </div></div></div>
-
-
-
-          </div>
-        </div>
-
-
-
-        <div ng-controller="ChatController">
-
-          <div class="container clearfix" ng-hide="showChat">
+            <!--             <div class="container" ng-show='activeItem==post' >
             <div class="row row-centered">
-              <div class="col-xs-7 col-centered">
-                <div class="item">
-                  <div class="content chatDiv chatP" scroll-glue="glued">
-                    <div ng-repeat="message in messages">
-                      <p class="columnText chatMessageAuthor">{{message.chatAuthor}}</p>
-                      <p style="display:inline;">{{message.chatMessage}}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            <div class="col-xs-6 col-centered col-min"><div class="item"><div class="content">
+            <h4 class="homeFont" style="color:red" ng-show="editPostEmptyError">You must fill in at least one input field</h4>
+            <p class="homeFont"><i class="fa fa-pencil"></i>&nbsp;Text(optional)</p>
+            <textarea name="text" rows="5" cols="19"
+            style="margin-bottom:2%;resize:none;overflow:scroll;" maxlength="11000" ng-model="text">{{text}}</textarea>
+            <br>
 
 
-          <div class="container clearfix" style="margin-top:-30px;"ng-hide="showChat">
-            <div class="row row-centered">
-              <div class="col-xs-7 col-centered">
-                <div class="item">
-                  <div class="content chatInputDiv">
+            <h4 class="homeFont"><i class="fa fa-file-code-o"></i>&nbsp;Choose one media type(optional)</h4>
+            <h4 class="homeFont" style="color:red" ng-show="editPostError">You can only use one media type per post</h4>
 
-                    <div class="content chatInputs">
-                      <form name="form" class="chatForm" novalidate>
-                        <label for="chatText" class="columnText">Message
-                          <input style="color:black;" type="text" id="chatText" ng-model="newMessage.chatMessage" maxlength="540" required>
-                        </label>
-                        <button class="glossy" ng-disabled="form.$invalid" ng-click="addMessage();">Submit</button>
-                      </form>
+            <p class="homeFont"><i class="fa fa-picture-o"></i>&nbsp;Image or Gif Link(optional)</button></p>
+            <input type="text" id="imageUrl" ng-model="imageGifUrl" value="{{imageGifUrl}}"><br>
 
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            <p class="homeFont"><i class="fa fa-youtube"></i>&nbsp;Youtube or <i class="fa fa-vimeo"></i>&nbsp;Vimeo URL(optional)</p>
+            <input type="text" id="videoUrl" value="{{ytVmUrl}}"  ng-model="ytVmUrl"><br>
+
+            <p class="homeFont"><i class="fa fa-spotify"></i>&nbsp;Spotify URL(optional)</p>
+            <input type="text" id="audioUrl" ng-model="spotUrl" value="{{spotUrl}}"><br>
+
+            <button class="confirmEditPostButton postButtons glossy" ng-click="saveChanges(post,text,imageGifUrl,ytVmUrl,spotUrl)">
+            <i class="fa fa-check-circle-o"></i>&nbsp;Confirm Changes</button><br>
+            <button class="deletePostButton postButtons glossy" ng-click="removePost(post)">
+            <i class="fa fa-minus-circle"></i>&nbsp;Delete Post</button><br>
+            <button class="cancelEditPostButton postButtons glossy" ng-click="cancelEditPost(post);">
+            <i class="fa fa-times-circle-o"></i>&nbsp;Cancel Edit</button>
+
+          </div></div></div>
 
         </div>
+      </div> -->
+
+
+      <div style="text-align:center;" ng-show="showAddComment">
+        <form name="form" novalidate>
+          <p class="columnText">Comment</p>
+          <textarea name="name" rows="8" cols="19" style="resize:none;"
+          ng-model="commentInput" max-length="5500" required></textarea><br>
+          <button class="glossy submitCommentButton" ng-disabled="form.$invalid" ng-click="addComment(post,commentAuthor,commentInput);
+          showAddComment = false;commentAuthor = null;commentInput = null;">Submit Comment</button><br><br>
+        </form>
+      </div>
+
+      <div class="commentSection" ng-show="showComments"
+      ng-repeat="comment in post.comments">
+      <p class="commentAndAuthorP columnText" style="display:inline;">
+        &nbsp;&nbsp;&nbsp;&nbsp;<b>{{comment.commentAuthor}}&nbsp;</b>
+        <p style="display:inline;">{{comment.commentInput}}</p></p>
+
+      </div>
+
+
+
+    </div></div></div>
+
+
+
+  </div>
+</div>
+
+
+
+<div ng-controller="ChatController">
+
+  <div class="container clearfix" ng-hide="showChat">
+    <div class="row row-centered">
+      <div class="col-xs-7 col-centered">
+        <div class="item">
+          <div class="content chatDiv chatP" scroll-glue="glued">
+            <div ng-repeat="message in messages">
+              <p class="columnText chatMessageAuthor">{{message.chatAuthor}}</p>
+              <p style="display:inline;">{{message.chatMessage}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container clearfix" style="margin-top:-30px;"ng-hide="showChat">
+    <div class="row row-centered">
+      <div class="col-xs-7 col-centered">
+        <div class="item">
+          <div class="content chatInputDiv">
+
+            <div class="content chatInputs">
+              <form name="form" class="chatForm" novalidate>
+                <label for="chatText" class="columnText">Message
+                  <input style="color:black;" type="text" id="chatText" ng-model="newMessage.chatMessage" maxlength="540" required>
+                </label>
+                <button class="glossy" ng-disabled="form.$invalid" ng-click="addMessage();">Submit</button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

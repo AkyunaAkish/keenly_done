@@ -3,13 +3,10 @@ app.controller('AuthController', function($scope, $location, $firebaseAuth, $fir
   var authObj = $firebaseAuth(authRef);
 
   var usernamesRef = new Firebase("https://keenlydone.firebaseio.com/usernames");
-  //use reference to create synchronized array
   $scope.usernames = $firebaseArray(usernamesRef);
 
 
   $scope.register = function(){
-
-    // $scope.registerError = false;
     $scope.registerUsernameError = false;
 
 
@@ -23,7 +20,6 @@ app.controller('AuthController', function($scope, $location, $firebaseAuth, $fir
         $scope.registerError = false;
         $scope.login();
       }, function(){
-        // $scope.registerError = true;
         $scope.registerUsernameError = true;
       })
     }
@@ -56,12 +52,11 @@ app.controller('AuthController', function($scope, $location, $firebaseAuth, $fir
           $scope.registerError = false;
           $scope.login();
         }, function(){
-          // $scope.registerError = true;
           $scope.registerUsernameError = true;
         })
-        console.log('Result',result); // "Stuff worked!"
+        console.log('Result',result);
       }, function(err) {
-        console.log('Error',err); // Error: "It broke"
+        console.log('Error',err);
       });
 
 
@@ -100,8 +95,6 @@ app.controller('AuthController', function($scope, $location, $firebaseAuth, $fir
 })
 
 app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$location', '$sce', function($scope, $firebaseArray, $firebaseAuth, $location, $sce){
-
-
   function authDataCallback(authData) {
     if (authData) {
       $scope.loggedUser = authData;
@@ -114,13 +107,28 @@ app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$
   var authRef = new Firebase("https://keenlydone.firebaseio.com");
 
   var authObj = $firebaseAuth(authRef);
-  //create reference
   var postsRef = new Firebase("https://keenlydone.firebaseio.com/posts");
-  //use reference to create synchronized array
   $scope.posts = $firebaseArray(postsRef);
 
   var usernamesRef = new Firebase("https://keenlydone.firebaseio.com/usernames");
   $scope.usernames = $firebaseArray(usernamesRef);
+
+  var authData = authObj.$getAuth();
+  $scope.currentUserEmail = authData.password.email;
+  console.log(authData);
+  // if (authData) {
+  //   console.log('in if');
+  //   console.log('usernames', $scope.usernames);
+  //   for (var i = 0; i < $scope.usernames.length; i++) {
+  //     console.log('in for loop');
+  //     console.log($scope.usernames[i]);
+  //     if(authData.password.email === $scope.usernames[i].emailRef)
+  //     $scope.currentUserEmail = $scope.usernames[i].username;
+  //   }
+  // } else {
+  //   console.log("Logged out");
+  // }
+  $scope.addPostError = false;
 
   $scope.trustSrc = function(src) {
     return $sce.trustAsResourceUrl(src);
@@ -128,102 +136,195 @@ app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$
 
   authRef.onAuth(authDataCallback);
 
-  // $scope.posts.$loaded()
-  // .then(function(){
-  //   angular.forEach($scope.posts, function(post) {
-  //     console.log(post);
-  //     post.videoUrl = $sce.trustAsHtml(post.videoUrl);
-  //   })
-  // });
-
   $scope.newPost = {author: "", description: "", imageUrl: "", videoUrl: "", audioUrl: ""};
 
   $scope.addPost = function(){
 
-    if($scope.newPost.audioUrl){
-      var n = $scope.newPost.audioUrl.split('/')
-      $scope.newPost.audioUrl = 'https://embed.spotify.com/?uri=spotify:track:' + n[n.length -1];
+    if ($scope.newPost.audioUrl === "" && $scope.newPost.videoUrl === "" && $scope.newPost.description === "" && $scope.newPost.imageUrl === "" || $scope.newPost.audioUrl === null && $scope.newPost.videoUrl === null && $scope.newPost.description === null && $scope.newPost.imageUrl === null|| !$scope.newPost.audioUrl && !$scope.newPost.videoUrl && !$scope.newPost.description && !$scope.newPost.imageUrl) {
+      $scope.addPostError = true;
+      $scope.showHideForm = true;
+      $scope.addPostButton = false;
+      $scope.showPostForm = true;
+      $scope.newPost.audioUrl = "";
+      $scope.newPost.videoUrl = "";
+      $scope.newPost.description = "";
+      $scope.newPost.imageUrl = "";
     }
-    // if($scope.newPost.description){
-    //   var urlRegex = /(https?:\/\/[^\s]+)/g;
-    //   var n = $scope.newPost.description.replace(urlRegex, $sce.trustAsHtml('<a href="$1" target="_blank">$1</a>'));
-    //   $scope.newPost.description = n;
-    // }
-
-    var pattern1 = /(?:http?s?:\/\/)?(?:www\.)?(?:vimeo\.com)\/?(.+)/g;
-    var pattern2 = /(?:http?s?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g;
-
-    if(pattern1.test($scope.newPost.videoUrl)){
-      var replacement = 'https://player.vimeo.com/video/$1';
-      $scope.newPost.videoUrl = $scope.newPost.videoUrl.replace(pattern1, replacement);
-    }
-
-
-    if(pattern2.test($scope.newPost.videoUrl)){
-      var replacement = 'http://www.youtube.com/embed/$1';
-      $scope.newPost.videoUrl = $scope.newPost.videoUrl.replace(pattern2, replacement);
-    }
-
-    var date = Date.now();
-
-    $scope.newPost.date = date;
-
-
-
-    var authData = authObj.$getAuth();
-
-    if (authData) {
-      for (var i = 0; i < $scope.usernames.length; i++) {
-        if(authData.password.email === $scope.usernames[i].emailRef)
-        $scope.newPost.author = $scope.usernames[i].username;
+    else{
+      if($scope.newPost.audioUrl){
+        var n = $scope.newPost.audioUrl.split('/')
+        $scope.newPost.audioUrl = 'https://embed.spotify.com/?uri=spotify:track:' + n[n.length -1];
       }
-    } else {
-      console.log("Logged out");
+
+      if($scope.newPost.videoUrl){
+        var pattern1 = /(?:http?s?:\/\/)?(?:www\.)?(?:vimeo\.com)\/?(.+)/g;
+        var pattern2 = /(?:http?s?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g;
+        var splitUrl = $scope.newPost.videoUrl.split('/');
+
+        if(splitUrl[3] === "embed"){
+          console.log('already embedded');
+          $scope.newPost.videoUrl = $scope.newPost.videoUrl;
+        }else{
+          console.log('embedding Url');
+          if(pattern1.test($scope.newPost.videoUrl)){
+            var replacement = 'https://player.vimeo.com/video/$1';
+            $scope.newPost.videoUrl = $scope.newPost.videoUrl.replace(pattern1, replacement);
+          }
+
+
+          if(pattern2.test($scope.newPost.videoUrl)){
+            var replacement = 'http://www.youtube.com/embed/$1';
+            $scope.newPost.videoUrl = $scope.newPost.videoUrl.replace(pattern2, replacement);
+          }
+        }
+      }
+      var date = Date.now();
+
+      $scope.newPost.date = date;
+
+
+
+      var authData = authObj.$getAuth();
+
+      if (authData) {
+        for (var i = 0; i < $scope.usernames.length; i++) {
+          if(authData.password.email === $scope.usernames[i].emailRef)
+          $scope.newPost.author = $scope.usernames[i].username;
+        }
+      } else {
+        console.log("Logged out");
+      }
+      $scope.newPost.emailReference = authData.password.email;
+
+      $scope.posts.$add($scope.newPost).then(function(data){
+        $scope.showPostForm = false;
+        $scope.showHideForm = false;
+        $scope.addPostButton = true;
+      })
+
     }
-
-
-    $scope.posts.$add($scope.newPost).then(function(data){
-    })
-
-
-    $scope.newPost.title = "";
-    // $scope.newPost.author = "";
+    $scope.newPost.audioUrl = "";
+    $scope.newPost.videoUrl = "";
     $scope.newPost.description = "";
     $scope.newPost.imageUrl = "";
-    $scope.newPost.videoUrl = "";
-    $scope.newPost.audioUrl = "";
   }
 
+
+
   // $scope.showPost = function(post){
-  //   $scope.title = post.title;
-  //   $scope.author = post.author;
-  //   $scope.description = post.description;
-  //   $scope.imageUrl = post.imageUrl;
-  //   $scope.videoUrl = post.videoUrl;
-  //   $scope.audioUrl = post.audioUrl;
-  //   $scope.id = post.$id;
+  //   $scope.editPostEmptyError = false;
+  //   $scope.editPostError = false;
+  //   $scope.text = post.description;
+  //   $scope.imageGifUrl = post.imageUrl;
+  //   $scope.ytVmUrl = post.videoUrl;
+  //   $scope.spotUrl = post.audioUrl;
+  // }
+  // $scope.cancelEditPost = function(post){
+  //   $scope.editPostEmptyError = false;
+  //   $scope.editPostError = false;
+  //   $scope.text = post.description;
+  //   $scope.imageGifUrl = post.imageUrl;
+  //   $scope.ytVmUrl = post.videoUrl;
+  //   $scope.spotUrl = post.audioUrl;
+  //   $scope.activeItem = null;
   // }
   //
-  // $scope.saveChanges = function(post,title,author,description,imageUrl,videoUrl,audioUrl){
-  //   //var id = $scope.id;
-  //   //var record = $scope.todos.$getRecord(id);
-  //   console.log(post);
-  //   console.log(title);
-  //   console.log(author);
-  //   console.log(description);
-  //   console.log(imageUrl);
-  //   console.log(videoUrl);
-  //   console.log(audioUrl);
+  // $scope.setActive=function(item) {
+  //   if($scope.activeItem){
+  //     $scope.activeItem = null;
+  //   }
+  //   else{
+  //     $scope.activeItem=item;
+  //   }
   //
-  //   post.title = title;
-  //   post.author = author;
-  //   post.description = description;
-  //   post.imageUrl = imageUrl;
-  //   post.videoUrl = videoUrl;
-  //   post.audioUrl = audioUrl;
-  //   console.log(post);
+  // }
+
+  // $scope.saveChanges = function(post,text,imageGifUrl,ytVmUrl,spotUrl){
+  //   var tempObj = post;
+  //   console.log('tempObj',tempObj);
   //
-  //   $scope.posts.$save(post);
+  //   $scope.activeItem = null;
+  //   $scope.editPostEmptyError = false;
+  //   $scope.editPostError = false;
+  //   // var t = text;
+  //   // var imgGif = imageGifUrl;
+  //   // var ytVm = ytVmUrl;
+  //   // var spotU = spotUrl;
+  //   // console.log('t',t,'imgGif',imgGif,'ytVm',ytVm,'spotU',spotU);
+  //   // console.log('t', t === "");
+  //   // console.log('imgGif',imgGif === "");
+  //   // console.log('ytVm',ytVm === "");
+  //   // console.log('spotU',spotU === "");
+  //
+  //   if(text === "" && imageGifUrl === "" && ytVmUrl === "" && spotUrl === ""){
+  //     $scope.showPost(post);
+  //     console.log('tempObj in IF',tempObj);
+  //     console.log('tempObj description in IF',tempObj.description);
+  //     console.log('scope text',text);
+  //     console.log('post',post);
+  //     $scope.editPostEmptyError = true;
+  //
+  //     // text = post.description;
+  //     // imageGifUrl = post.imageUrl;
+  //     // ytVmUrl = post.videoUrl;
+  //     // spotUrl = post.audioUrl;
+  //     // post.text = tempObj.description;
+  //     // post.imageGifUrl = tempObj.imageUrl;
+  //     // post.ytVmUrl = tempObj.videoUrl;
+  //     // post.spotUrl = tempObj.audioUrl;
+  //     // console.log('audio URL',post.audioUrl);
+  //     console.log('text with post',post.description);
+  //     //
+  //     // $scope.posts.$save(post).then(function(){
+  //     // })
+  //     console.log('showPost', $scope.showPost);
+  //     $scope.setActive(post);
+  //     // $scope.showPost(post);
+  //   }
+  //   else{
+  //     if(spotUrl){
+  //       console.log('Spot URL',spotUrl);
+  //       var n = spotUrl.split('/')
+  //       post.audioUrl = 'https://embed.spotify.com/?uri=spotify:track:' + n[n.length -1];
+  //       console.log('Post Audio Url',post.audioUr);
+  //     }
+  //
+  //
+  //
+  //     var pattern1 = /(?:http?s?:\/\/)?(?:www\.)?(?:vimeo\.com)\/?(.+)/g;
+  //     var pattern2 = /(?:http?s?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g;
+  //     var splitUrl = ytVmUrl.split('/');
+  //     if(splitUrl[3] === "embed"){
+  //       console.log('already embedded');
+  //       post.videoUrl = ytVmUrl;
+  //     }else{
+  //       console.log('embedding url');
+  //
+  //
+  //       if(pattern1.test(ytVmUrl)){
+  //         console.log('Vimeo Video');
+  //         var replacement = 'https://player.vimeo.com/video/$1';
+  //         post.videoUrl = ytVmUrl.replace(pattern1, replacement);
+  //       }
+  //
+  //
+  //       if(pattern2.test(ytVmUrl)){
+  //         console.log('Youtube Video');
+  //         var replacement = 'http://www.youtube.com/embed/$1';
+  //         post.videoUrl = ytVmUrl.replace(pattern2, replacement);
+  //       }
+  //     }
+  //
+  //
+  //     post.description = text;
+  //     post.imageUrl = imageGifUrl;
+  //
+  //
+  //     $scope.posts.$save(post).then(function(){
+  //     })
+  //
+  //   }
+  //
   // }
 
   $scope.removePost = function(post){
@@ -262,7 +363,6 @@ app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$
       console.log("Logged out");
     }
 
-    // commentObj.commentAuthor = commentAuthor;
     commentObj.commentInput = commentInput;
     post.comments.push(commentObj);
 
@@ -303,7 +403,6 @@ function($scope, $firebaseArray, $firebaseAuth, $location, $sce, $anchorScroll){
   var authObj = $firebaseAuth(authRef);
 
   var messagesRef = new Firebase("https://keenlydone.firebaseio.com/messages");
-  //use reference to create synchronized array
   $scope.messages = $firebaseArray(messagesRef);
 
   var usernamesRef = new Firebase("https://keenlydone.firebaseio.com/usernames");
