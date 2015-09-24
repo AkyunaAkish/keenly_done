@@ -95,6 +95,8 @@ app.controller('AuthController', function($scope, $location, $firebaseAuth, $fir
 })
 
 app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$location', '$sce', function($scope, $firebaseArray, $firebaseAuth, $location, $sce){
+
+
   function authDataCallback(authData) {
     if (authData) {
       $scope.loggedUser = authData;
