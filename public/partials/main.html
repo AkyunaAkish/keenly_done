@@ -280,10 +280,10 @@
     <div class="row row-centered">
       <div class="col-xs-7 col-centered">
         <div class="item">
-          <div class="content chatDiv chatP" scroll-glue="glued">
+          <div class="content chatDiv chatP linkyClass" scroll-glue="glued">
             <div ng-repeat="message in messages">
               <p class="columnText chatMessageAuthor">{{message.chatAuthor}}</p>
-              <p style="display:inline;">{{message.chatMessage}}</p>
+              <p style="display:inline;" ng-bind-html="message.chatMessage | linky:'_blank'"></p>
             </div>
           </div>
         </div>
