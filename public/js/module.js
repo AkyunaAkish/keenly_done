@@ -1,1 +1,1 @@
-var app = angular.module('keenlyDoneApp', ['ngRoute','firebase','ngAnimate','angularMoment','luegg.directives'])
+var app = angular.module('keenlyDoneApp', ['ngRoute','firebase','ngAnimate','angularMoment','luegg.directives','ngSanitize'])

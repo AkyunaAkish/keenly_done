@@ -96,7 +96,6 @@ app.controller('AuthController', function($scope, $location, $firebaseAuth, $fir
 
 app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$location', '$sce', function($scope, $firebaseArray, $firebaseAuth, $location, $sce){
 
-
   function authDataCallback(authData) {
     if (authData) {
       $scope.loggedUser = authData;
@@ -142,29 +141,29 @@ app.controller('PostsController',['$scope','$firebaseArray', '$firebaseAuth', '$
 
   $scope.addPost = function(){
 
-    if($scope.newPost.description){
-      console.log('Description',$scope.newPost.description);
-
-      function linkify(inputText) {
-        var replacedText, replacePattern1, replacePattern2, replacePattern3;
-
-        //URLs starting with http://, https://, or ftp://
-        replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
-        replacedText = inputText.replace(replacePattern1, '<a href="$1" target="_blank">$1</a>');
-
-        //URLs starting with "www." (without // before it, or it'd re-link the ones done above).
-        replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
-        replacedText = replacedText.replace(replacePattern2, '$1<a href="http://$2" target="_blank">$2</a>');
-
-        //Change email addresses to mailto:: links.
-        replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
-        replacedText = replacedText.replace(replacePattern3, '<a href="mailto:$1">$1</a>');
-
-        return replacedText;
-      }
-      $scope.newPost.description = linkify($scope.newPost.description);
-
-    }
+    // if($scope.newPost.description){
+    //   console.log('Description',$scope.newPost.description);
+    //
+    //   function linkify(inputText) {
+    //     var replacedText, replacePattern1, replacePattern2, replacePattern3;
+    //
+    //     //URLs starting with http://, https://, or ftp://
+    //     replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+    //     replacedText = inputText.replace(replacePattern1, '<a href="$1" target="_blank">$1</a>');
+    //
+    //     //URLs starting with "www." (without // before it, or it'd re-link the ones done above).
+    //     replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+    //     replacedText = replacedText.replace(replacePattern2, '$1<a href="http://$2" target="_blank">$2</a>');
+    //
+    //     //Change email addresses to mailto:: links.
+    //     replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
+    //     replacedText = replacedText.replace(replacePattern3, '<a href="mailto:$1">$1</a>');
+    //
+    //     return replacedText;
+    //   }
+    //   $scope.newPost.description = linkify($scope.newPost.description);
+    //
+    // }
 
 
     if ($scope.newPost.audioUrl === "" && $scope.newPost.videoUrl === "" && $scope.newPost.description === "" && $scope.newPost.imageUrl === "" || $scope.newPost.audioUrl === null && $scope.newPost.videoUrl === null && $scope.newPost.description === null && $scope.newPost.imageUrl === null|| !$scope.newPost.audioUrl && !$scope.newPost.videoUrl && !$scope.newPost.description && !$scope.newPost.imageUrl) {

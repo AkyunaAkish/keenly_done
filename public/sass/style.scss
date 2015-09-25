@@ -20,6 +20,17 @@ body{
   clear: both;
 }
 
+.linkyClass a{
+  font-weight: bold;
+  color: rgb(61,91,174);
+  text-decoration: underline;
+}
+
+
+.linkyClass a:hover{
+  text-decoration: none;
+}
+
 
 
 .commentSection{
@@ -86,7 +97,7 @@ body{
 }
 
 .landingLoginDiv{
-margin-top: 70px;
+  margin-top: 70px;
 }
 
 .col-fixed {
@@ -153,13 +164,13 @@ button:hover{
   border-radius: 20px;
 }
 /* html{
-    max-width: 100%;
+max-width: 100%;
 } */
 /* .ng-scope{
-  max-width: 100%;
+max-width: 100%;
 } */
 /* .firstButtonNav{
-  max-width: 100% !important;
+max-width: 100% !important;
 } */
 .nav-pills{
   background: rgb(56,155,233);
@@ -278,37 +289,37 @@ button:hover{
   margin-right: 0;
 }
 /* form[novalidate] input{
-  border-left-width: 8px;
-  border-color: #3498db;
-  border-style: solid;
+border-left-width: 8px;
+border-color: #3498db;
+border-style: solid;
 }
 input[required].ng-pristine{
-  border-color: #e74c3c;
+border-color: #e74c3c;
 }
 
 input.ng-invalid.ng-dirty{
-  border-color: #e74c3c;
+border-color: #e74c3c;
 }
 
 input.ng-valid.ng-dirty{
-  border-color: #2ecc71;
+border-color: #2ecc71;
 }
 
 
 
 
 textarea[required].ng-pristine{
-  border-color: #e74c3c;
+border-color: #e74c3c;
 }
 
 textarea.ng-invalid.ng-dirty{
-  border-color: #e74c3c;
+border-color: #e74c3c;
 }
 
 textarea.ng-valid.ng-dirty{
-  border-color: #2ecc71;
+border-color: #2ecc71;
 }
- */
+*/
 /* .ng-enter{
 transition:2.15s;
 opacity: 0;
@@ -331,4 +342,4 @@ opacity: 1;
 .ng-leave-active{
 opacity: 0;
 }
- */
+*/
